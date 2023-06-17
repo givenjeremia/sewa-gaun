@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Gaun;
+use App\Models\KatergoryPerias;
 use Illuminate\Http\Request;
 use App\Models\PenyewaanGaun;
 
@@ -17,17 +18,12 @@ class PenyewaanGaunController extends Controller
     public function index()
     {
         //
+       
         // Get Date Now
         $date_now = Carbon::now()->timezone('Asia/Jakarta')->toDateString();
-        // dd($currentTime->toDateString());
-        // $data = Gaun::all();
-        // foreach ($data as $key => $value) {
-        //     // # code...
-        //     dd($value->jadwal()->where('tanggal_waktu', 'like', $currentTime->toDateString().'%')->get());
-        // }
         // Cek Jadwal Gaun 
         $gaun = Gaun::paginate(8);
-        return view('client.penyewaan_gaun.index',compact('gaun','date_now'));
+        return view('client.penyewaan_gaun.index',compact('gaun','date_now' ));
     }
 
     /**
@@ -107,13 +103,6 @@ class PenyewaanGaunController extends Controller
         //
     }
 
-    public function cariGaun(Request $request){
-        $query = '%'.$request->get('query').'%';
-        $gaun = Gaun::where('nama', 'like', $query)->paginate(8);
-        return response()->json(array(
-            'status' => 'oke',
-            'msg' => view('client.penyewaan_gaun.data',compact('gaun'))->render()
-        ), 200);
-    }
+   
 
 }

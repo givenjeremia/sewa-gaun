@@ -26,6 +26,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('penyewaan-gaun', App\Http\Controllers\PenyewaanGaunController::class);
 Route::post('cari-gaun', [App\Http\Controllers\PenyewaanGaunController::class,'cariGaun']);
 Route::get('penyewaan-gaun/create/{id}', [App\Http\Controllers\PenyewaanGaunController::class,'create']);
+// Client - Gaun 
+Route::resource('penyewaan-perias', App\Http\Controllers\PenyewaanPeriasController::class);
 
 // Pemesanan
 Route::resource('pemesanan-gaun', App\Http\Controllers\PemesananGaunController::class);
@@ -47,6 +49,7 @@ Route::prefix('admin/')->group(function () {
     Route::resource('gambar-gaun', App\Http\Controllers\GambarGaunController::class);
     Route::resource('perias', App\Http\Controllers\PeriasController::class);
     Route::resource('gambar-rias', App\Http\Controllers\GambarRiasController::class);
+    Route::resource('hasil-rias', App\Http\Controllers\HasilRiasController::class);
     Route::resource('jadwal', App\Http\Controllers\JadwalController::class);
     Route::resource('kategory-perias', App\Http\Controllers\KategoryPeriasController::class);
 

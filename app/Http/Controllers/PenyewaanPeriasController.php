@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Perias;
 use Illuminate\Http\Request;
+use App\Models\KatergoryPerias;
 use App\Models\PenyewaanPerias;
 
 class PenyewaanPeriasController extends Controller
@@ -15,8 +17,9 @@ class PenyewaanPeriasController extends Controller
      */
     public function index()
     {
-        //
-        return view('client.penyewaan_mua.index');
+        $kategori = KatergoryPerias::all();
+        $perias = Perias::paginate(8);
+        return view('client.penyewaan_mua.index',compact('perias','kategori'));
     }
 
     /**
@@ -53,7 +56,7 @@ class PenyewaanPeriasController extends Controller
         $perias = Perias::find($penyewaanPerias);
         return response()->json(array(
             'status' => 'success',
-            'msg' => view('client.perias.detail',compact('perias'))->render()
+            'msg' => view('client.penyewaan_mua.modal.detail',compact('perias'))->render()
         ), 200);
     }
 
@@ -90,4 +93,17 @@ class PenyewaanPeriasController extends Controller
     {
         //
     }
+
+    public function cariPerias(Request $request){
+        $query = '%'.$request->get('query').'%';
+        $date_now = Carbon::now()->timezone('Asia/Jakarta')->toDateString();
+    
+        // $gaun = Gaun::where('nama', 'like', $query)->paginate(8);
+        // return response()->json(array(
+        //     'status' => 'oke',
+        //     'msg' => view('client.penyewaan_gaun.data',compact('gaun','date_now'))->render()
+        // ), 200);
+    }
+    
+    
 }

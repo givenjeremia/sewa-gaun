@@ -17,7 +17,7 @@ class GaunController extends Controller
      */
     public function index()
     {
-        
+        $data = Gaun::all();
         return view('admin.list.gaun.index',compact('data'));
     }
 

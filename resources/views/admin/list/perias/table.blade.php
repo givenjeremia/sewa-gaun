@@ -21,8 +21,7 @@
                     <tr>
                         <td>{{ $key+1 }}</td>
                         <td>
-                            <a href="#modalHasilRias" data-toggle="modal" class="btn btn-success" onclick="">{{
-                                $item->nama }}</a>
+                            <a href="#modalHasilRias" data-toggle="modal" class="btn btn-success" onclick="getDetailGambar({{ $item->id }})">{{$item->nama }}</a>
                         </td>
                         <td>{{ number_format($item->harga) }}</td>
                         <td>{{ $item->kategori_perias->nama }}</td>

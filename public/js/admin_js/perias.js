@@ -1,6 +1,4 @@
 
-
-
 function getData() {
     $.ajax({
         url: "/admin/periasAjax",
@@ -218,7 +216,7 @@ function hapusPerias(id,data) {
 }
 
 function getDetailGambar(id) {
-    url = "/admin/gambar-perias/" + id;
+    url = "/admin/hasil-rias/" + id;
     $.ajax({
         url: url,
         type: "GET",

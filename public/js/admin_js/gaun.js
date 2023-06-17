@@ -111,7 +111,7 @@ function tambahGaun() {
         }
     });
     console.log(form_data);
-    // Sudah
+    // Sudah , merge mas yang sudah 
     // Ajax
     let act = "/admin/gaun";
     $.ajax({

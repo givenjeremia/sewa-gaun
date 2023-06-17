@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\HasilRias;
+use App\Models\Perias;
 use Illuminate\Http\Request;
 
 class HasilRiasController extends Controller
@@ -36,6 +37,7 @@ class HasilRiasController extends Controller
     public function store(Request $request)
     {
         //
+        
     }
 
     /**
@@ -44,9 +46,16 @@ class HasilRiasController extends Controller
      * @param  \App\Models\HasilRias  $hasilRias
      * @return \Illuminate\Http\Response
      */
-    public function show(HasilRias $hasilRias)
+    public function show( $hasilRias)
     {
         //
+        $perias = Perias::find($hasilRias);
+        $hasil_rias = HasilRias::where('perias_id', '=', $hasilRias)->get();
+        $nama_perias = $perias->nama;
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => view('admin.list.perias.detail_hasil_rias',compact('hasil_rias','nama_perias'))->render()
+        ), 200);
     }
 
     /**

@@ -12,28 +12,54 @@
     </div>
 </div>
 
-<div class="m-4">
-    <div class="row">
-        @for ($i = 0; $i < 10; $i++)
+<div class="row my-4">
+    <div class="col-md-2">
+      <div class="card card-primary card-outline me-2">
+        <div class="card-body pt-2">
+          <h3 class="profile-username text-center mb-3">Kategori</h3>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="kategori_perias" id="flexRadioDefault1" value="0" checked>
+            <label class="form-check-label" for="flexRadioDefault1">
+              Semua
+            </label>
+          </div>
+          @foreach($kategori as $key => $value)
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="kategori_perias" id="flexRadioDefault1" value="{{ $value->id }}">
+            <label class="form-check-label" for="flexRadioDefault1">
+              {{ $value->nama }}
+            </label>
+          </div>
             
-        <div class="col-md-3">
-            <div class="card rounded">
-
-                <img class="card-img-top" src="{{ asset('asset/login.png') }}" alt="Card image cap" width="150"
-                        height="200" style="object-fit: cover;">
-                    <div class="card-body">
-                        <h4 class="card-title text-bold">Nama Gaun</h4>
-                        <h5 class="card-text text-bold">Rp. 6000000</h5>
-                        <h6 class="card-text text-bold">( Wedding ) Status</h6>
-                    </div>
-            </div>
+          @endforeach
+         
         </div>
-        @endfor
+        <!-- /.card-body -->
+      </div>
     </div>
-    
+    <!-- /.col -->
+    <div class="col-md-10">
+        <div class="data-gaun">
+
+          @include('client/penyewaan_mua/data')
+        </div>
+    </div>
+    <!-- /.col -->
+  </div>
+
+{{-- Detail Gambar Perias --}}
+<div class="modal fade" id="detailPerias" data-bs-scroll="true" tabindex="-1" role="basic" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content" id="modalContentDetailPerias">
+
+    </div>
+  </div>
 </div>
 
 
+@endsection
 
+@section('js_client')
+    <script src="{{ asset('js/client_js/perias.js') }}"></script>
 @endsection
 
