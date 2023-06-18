@@ -47,6 +47,15 @@
           </ul>
         </li>
 
+        {{--  --}}
+        <li class="nav-item dropdown">
+          <a id="dropdownSubMenu3" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+            class="nav-link dropdown-toggle">Paket</a>
+          <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow">
+            <li><a href="{{url('admin/paket')}}" class="dropdown-item">Data</a></li>
+          </ul>
+        </li>
+
         {{-- Role Gaun --}}
         <li class="nav-item dropdown">
           <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"

@@ -18,4 +18,8 @@ class Perias extends Model
     public function hasil_rias(){
         return $this->hasMany(HasilRias::class,'perias_id','id');    
     }
+
+    public function pemesanan_perias(){
+        return $this->belongsToMany(PemesananPerias::class,'detail_pemesanan_perias','perias_id','pemesanan_perias_id');
+    }
 }

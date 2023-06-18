@@ -24,10 +24,10 @@
             </a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{ url('penyewaan-gaun') }}" class="nav-link text-bold ">Persewaan Gaun</a>
+            <a href="{{ url('penyewaan-gaun') }}" class="nav-link text-bold  {{ Request::is('penyewaan-gaun') ? 'active' : '' }} ">Persewaan Gaun</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{ url('penyewaan-mua') }}" class="nav-link text-bold">Mackup Artis</a>
+            <a href="{{ url('penyewaan-mua') }}" class="nav-link text-bold {{ Request::is('penyewaan-mua') ? 'active' : '' }} ">Mackup Artis</a>
         </li>
         
         @if (Auth::user())
@@ -36,6 +36,7 @@
             <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow">
                 <li><a href="{{url('transaksi-gaun')}}" class="dropdown-item">Gaun</a></li>
                 <li><a href="{{url('transaksi-perias')}}" class="dropdown-item">Perias</a></li>
+                <li><a href="{{url('transaksi-paket')}}" class="dropdown-item">Paket</a></li>
 
             </ul>
         </li>

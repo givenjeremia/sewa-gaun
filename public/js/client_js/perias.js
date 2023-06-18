@@ -9,7 +9,7 @@ $(document).ready(function () {
     });
 });
 // Get Page
-var page = $("#penyewaan_gaun_page").val();
+var page = $("#penyewaan_perias_page").val();
 // Get Data
 function getData() {}
 
@@ -30,11 +30,6 @@ $("#input-search-gaun").on("keyup change", function () {
     });
 });
 
-// function getDays(date1, date2) {
-//     let difference = date2.getTime() - date1.getTime();
-//     let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
-//     return TotalDays + 1;
-// }
 
 function getDetailPerias(id) {
     url = "/penyewaan-perias/" + id;
@@ -52,23 +47,23 @@ $(document).ready(function () {
     // Change the checked state of the radio button
 });
 
-function getPemesananForm(id) {
-    url = "/penyewaan-gaun/create/" + id;
+function getPemesananForm(id,jenis) {
+    url = "/penyewaan-perias/create/" + id;
     $.ajax({
         url: url,
         type: "GET",
         success: function (data) {
-            $("#detailGaun").on("hidden.bs.modal", function () {
+            $("#detailPerias").on("hidden.bs.modal", function () {
                 $("#pemesanan").modal("show");
                 $("#modalContentPemesanan").html(data.msg);
             });
-            $("#detailGaun").modal("hide");
+            $("#detailPerias").modal("hide");
         },
     });
 }
 
-function getPembayaranForm(id) {
-    url = "/pemesanan-gaun/" + id;
+function getPembayaranForm(id,jenis) {
+    url = "/pemesanan-perias/" + id;
     $.ajax({
         url: url,
         type: "GET",
@@ -82,7 +77,7 @@ function getPembayaranForm(id) {
     });
 }
 
-function submitPemesanan(id) {
+function submitPemesanan(id,jenis) {
     // New Form Data
     var form_data = new FormData();
     form_data.append("_method", "POST");
@@ -92,9 +87,9 @@ function submitPemesanan(id) {
         var inputValue = $(this).val();
         form_data.append(inputName, inputValue);
     });
-    form_data.append("gaun_id", id);
+    form_data.append("perias_id", id);
 
-    url = "/pemesanan-gaun";
+    url = "/pemesanan-perias";
     $.ajax({
         url: url,
         type: "POST",
@@ -167,7 +162,7 @@ function getSisaPembayaran() {
     $("#sisa_pelunasan").val(sisa_pembayaran);
 }
 
-function submitPembayaran(id) {
+function submitPembayaran(id,jenis) {
     var metode_pembayaran = $(".rdo-pembayaran:checked").val();
     var bukti_pembayaran = document.getElementById("bukti_pembayaran").files;
 
@@ -184,8 +179,8 @@ function submitPembayaran(id) {
         form_data.append("sisa_pembayaran", sisa_pembayaran);
         form_data.append("bukti_pembayaran", bukti_pembayaran[0]);
         form_data.append("metode_pembayaran", metode_pembayaran);
-        form_data.append("pemesanan_gaun_id", id);
-        url = "/pembayaran-gaun";
+        form_data.append("pemesanan_perias_id", id);
+        url = "/pembayaran-perias";
         $.ajax({
             url: url,
             type: "POST",

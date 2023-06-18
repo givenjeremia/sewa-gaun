@@ -52,7 +52,7 @@ $(document).ready(function () {
     // Change the checked state of the radio button
 });
 
-function getPemesananForm(id) {
+function getPemesananForm(id,jenis) {
     url = "/penyewaan-gaun/create/" + id;
     $.ajax({
         url: url,
@@ -67,7 +67,7 @@ function getPemesananForm(id) {
     });
 }
 
-function getPembayaranForm(id) {
+function getPembayaranForm(id,jenis) {
     url = "/pemesanan-gaun/" + id;
     $.ajax({
         url: url,
@@ -82,7 +82,7 @@ function getPembayaranForm(id) {
     });
 }
 
-function submitPemesanan(id) {
+function submitPemesanan(id,jenis) {
     // New Form Data
     var form_data = new FormData();
     form_data.append("_method", "POST");
@@ -167,7 +167,7 @@ function getSisaPembayaran() {
     $("#sisa_pelunasan").val(sisa_pembayaran);
 }
 
-function submitPembayaran(id) {
+function submitPembayaran(id,jenis) {
     var metode_pembayaran = $(".rdo-pembayaran:checked").val();
     var bukti_pembayaran = document.getElementById("bukti_pembayaran").files;
 

@@ -1,6 +1,7 @@
 @extends('layouts.client')
 
 @section('content')
+<input type="hidden" id="penyewaan_perias_page"  value="{{ csrf_token() }}">
 <h2 class="text-center display-4 custom-text-primary-poppins text-bold">Mackup Artis</h2>
 <div class="row">
     <div class="col-md-8 offset-md-2">
@@ -55,7 +56,23 @@
     </div>
   </div>
 </div>
+{{-- Pemesanan --}}
+<div class="modal fade" id="pemesanan" data-bs-scroll="true" tabindex="-1" role="basic" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content" id="modalContentPemesanan">
 
+    </div>
+  </div>
+</div>
+
+{{-- Pembayaran --}}
+<div class="modal fade" id="pembayaran" data-bs-scroll="true" tabindex="-1" role="basic" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content" id="modalContentPembayaran">
+
+    </div>
+  </div>
+</div>
 
 @endsection
 

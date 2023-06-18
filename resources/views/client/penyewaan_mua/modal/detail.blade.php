@@ -62,5 +62,5 @@
     @php
         $auth_check = Auth::user() ? Auth::user() : false;
     @endphp
-    <button type="button" class="btn btn-default text-white" onclick="getPemesananForm({{$perias->id}})" style="background-color:#89375F" {{ Auth::user() ? '' : 'disabled' }} >Sewa</button>
+    <button type="button" class="btn btn-default text-white" onclick="getPemesananForm({{$perias->id}},'perias')" style="background-color:#89375F" {{ Auth::user() ? '' : 'disabled' }} >Sewa</button>
 </div>

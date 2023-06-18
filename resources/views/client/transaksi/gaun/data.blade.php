@@ -1,5 +1,5 @@
 @foreach ($pemesananGaun as $item)
-<a href="#" class="" onclick="detailTransaksiPemesananGaun({{ $item->id }})">
+<a href="#detailTransaksi" data-toggle="modal" onclick="detailTransaksiPemesananGaun({{ $item->id }})">
 <div class="card text-dark">
     <div class="card-header text-bold">
       Nomor Transaksi Pemesanan {{ $item->nomor_pemesanan }}
@@ -38,7 +38,7 @@
                 Status : {{ $list_status[$item->status] }}
             </p>
             <p class="card-text">
-                Total Pembayaran : {{ $item->total_pembayaran }}
+                Total Pembayaran : Rp. {{ number_format($item->total_pembayaran) }}
             </p>
         </div>
         <br>

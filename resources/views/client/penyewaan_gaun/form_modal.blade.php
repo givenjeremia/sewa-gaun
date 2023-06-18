@@ -73,7 +73,7 @@
 
 <div class="modal-footer">
   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-  <button type="button" class="btn btn-default text-white" onclick="submitPemesanan({{$gaun->id}})" style="background-color:#89375F">Pesan</button>
+  <button type="button" class="btn btn-default text-white" onclick="submitPemesanan({{$gaun->id}},'{{ $jenis }}')" style="background-color:#89375F">Pesan</button>
 </div>
 
 <script>

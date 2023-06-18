@@ -8,7 +8,7 @@
   <div class="row">
     <div class="col">
       <div class="">
-        <img src="{{ asset('gambar/perias/' . $value->id . '/' . $value->hasil_rias[0]->id.'/'. $value->hasil_rias[0]->gambars[0]->nama_file) }}" class="product-image w-75" alt="Product Image">
+        <img src="{{ asset('gambar/perias/' . $perias->id . '/' . $perias->hasil_rias[0]->id.'/'. $perias->hasil_rias[0]->gambars[0]->nama_file) }}" class="product-image w-75" alt="Product Image">
       </div>
       <div class="product-image-thumbs">
           @foreach ($perias->hasil_rias as $key => $item)
@@ -51,14 +51,14 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label>Jam Sewa</label>
-                    <input id="jam_sewa_pemesanan" type="date" name="jam_sewa" class="form-control" required>
+                    <input id="jam_sewa_pemesanan" type="time" name="jam_sewa" class="form-control" required>
                   </div>
                 </div>
             </div>
 
             <div class="form-group">
-              <h2>Rp. <span id="total_pemesanan_gaun">0</span></h2>
-              <input type="hidden" id="total_input" name="total">
+              <h2>Rp. <span id="total_pemesanan_gaun">{{ number_format($perias->harga) }}</span></h2>
+              <input type="hidden" id="total_input" value="{{ $perias->harga }}" name="total">
             </div>
 
         </form>
@@ -71,7 +71,7 @@
 
 <div class="modal-footer">
   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-  <button type="button" class="btn btn-default text-white" onclick="submitPemesanan({{$gaun->id}})" style="background-color:#89375F">Pesan</button>
+  <button type="button" class="btn btn-default text-white" onclick="submitPemesanan({{$perias->id}},'perias')" style="background-color:#89375F">Pesan</button>
 </div>
 
 <script>
@@ -82,21 +82,5 @@
       $('.product-image-thumb.active').removeClass('active')
       $(this).addClass('active')
     })
-    $('#mulai_sewa_pemesanan, #akhir_sewa_pemesanan').on('change', function() {
-      var harga_sewa = '{{$gaun->harga_sewa}}'
-    // alert("masuk");
-    var awal =  new Date($('#mulai_sewa_pemesanan').val())
-    console.log(awal);
-    var akhir =  new Date($('#akhir_sewa_pemesanan').val())
-    console.log(akhir);
-    var difference = akhir.getTime() - awal.getTime();
-    var TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
-
-    total_harga = parseInt(harga_sewa) * parseInt(TotalDays)
-    $('#total_pemesanan_gaun').html(total_harga.toLocaleString())
-    $('#total_input').val(total_harga)
-
-    console.log(total_harga);
-});
   })
 </script>

@@ -27,10 +27,14 @@ class PenyewaanPeriasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         //
-        return view('client.penyewaan_mua.form');
+        $perias = Perias::find($id);
+        return response()->json(array(
+            'status' => 'success',
+            'msg' => view('client.penyewaan_mua.modal.form',compact('perias'))->render()
+        ), 200);
     }
 
     /**

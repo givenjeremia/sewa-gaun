@@ -36,7 +36,7 @@ class LoginController extends Controller
                 return '/admin';
                 break;
             case 1:
-                return '/adnin/gaun';
+                return '/admin/gaun';
                 break;
             case 2:
                 return '/admin/perias';

@@ -20,4 +20,8 @@ class Gaun extends Model
         return $this->hasMany(Jadwal::class,'gaun_id','id');
     }
 
+    public function pemesanan_gaun(){
+        return $this->belongsToMany(PemesananGaun::class,'detail_pemesanan_gaun','gaun_id','pemesanan_gaun_id');
+    }
+
 }
