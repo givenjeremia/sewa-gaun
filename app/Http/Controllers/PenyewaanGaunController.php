@@ -36,9 +36,10 @@ class PenyewaanGaunController extends Controller
         //
         // return view('client.penyewaan_gaun.form');
         $gaun = Gaun::find($id);
+        $jenis = "gaun";
         return response()->json(array(
             'status' => 'success',
-            'msg' => view('client.penyewaan_gaun.form_modal',compact('gaun'))->render()
+            'msg' => view('client.penyewaan_gaun.form_modal',compact('gaun','jenis'))->render()
         ), 200);
     }
 
@@ -63,9 +64,10 @@ class PenyewaanGaunController extends Controller
     {
         //
         $gaun = Gaun::find($penyewaanGaun);
+        $jenis = "gaun";
         return response()->json(array(
             'status' => 'success',
-            'msg' => view('client.penyewaan_gaun.detail',compact('gaun'))->render()
+            'msg' => view('client.penyewaan_gaun.detail',compact('gaun','jenis'))->render()
         ), 200);
     }
 

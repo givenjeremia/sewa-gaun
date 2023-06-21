@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Gaun;
 use App\Models\GambarGaun;
+use App\Models\KategoriGaun;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -18,7 +19,8 @@ class GaunController extends Controller
     public function index()
     {
         $data = Gaun::all();
-        return view('admin.list.gaun.index',compact('data'));
+        $kategori = KategoriGaun::all();
+        return view('admin.list.gaun.index',compact('data','kategori'));
     }
 
     public function indexAjax()
@@ -56,6 +58,7 @@ class GaunController extends Controller
         $gaun->nama = $request->get('nama');
         $gaun->harga_sewa = $request->get('harga');
         $gaun->deskripsi = $request->get('deskripsi');
+        $gaun->kategori_gaun_id = $request->get('kategori_gaun');
         $gaun->save();
         $id_new_gaun = $gaun->id;
         // Proses Gambar
@@ -155,4 +158,6 @@ class GaunController extends Controller
             return response()->json(array('status' => 'gagal', 'msg' => 'Gaun Gagal Di Delete'), 200);
         }
     }
+
+    
 }

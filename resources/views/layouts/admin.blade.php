@@ -32,7 +32,7 @@
           <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
          
             <li><a href="{{url('admin/gaun')}}" class="dropdown-item">Data</a></li>
-     
+            <li><a href="{{url('admin/kategory-gaun')}}" class="dropdown-item">Kategori</a></li>
             <li><a href="{{url('admin/jadwal')}}" class="dropdown-item">Jadwal</a></li>
           </ul>
         </li>

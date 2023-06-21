@@ -29,6 +29,14 @@
                 <textarea name="deskripsi" name="deskripsi" class="form-control" id="" rows="5"></textarea>
               </div>
               <div class="form-group">
+                <label for="exampleInputEmail1">Kategori</label>
+                <select name="kategori_gaun" class="form-control">
+                  @foreach($kategori as $key => $value)
+                    <option value="{{ $value->id }}">{{ $value->nama }}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="form-group">
                 <label for="exampleInputFile">Gambar Max 2 MB</label>
                 <div class="input-group">
                   <div class="custom-file">

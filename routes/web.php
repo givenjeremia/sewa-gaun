@@ -74,12 +74,14 @@ Route::prefix('admin/')->group(function () {
     Route::resource('hasil-rias', App\Http\Controllers\HasilRiasController::class);
     Route::resource('jadwal', App\Http\Controllers\JadwalController::class);
     Route::resource('kategory-perias', App\Http\Controllers\KategoryPeriasController::class);
+    Route::resource('kategory-gaun', App\Http\Controllers\KategoriGaunController::class);
 
 
     // Ajax
     Route::get('gaunAjax', [App\Http\Controllers\GaunController::class,'indexAjax']);
     Route::get('periasAjax', [App\Http\Controllers\PeriasController::class,'indexAjax']);
     Route::get('kategoriPeriasAjax', [App\Http\Controllers\KategoryPeriasController::class,'indexAjax']);
+    Route::get('kategoriGaunAjax', [App\Http\Controllers\KategoriGaunController::class,'indexAjax']);
     Route::get('paketAjax', [App\Http\Controllers\PaketController::class,'indexAjax']);
 
 

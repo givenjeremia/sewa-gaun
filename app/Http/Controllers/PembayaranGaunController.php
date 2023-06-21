@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\PembayaranGaun;
+use App\Models\PemesananGaun;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
@@ -18,7 +19,18 @@ class PembayaranGaunController extends Controller
     public function index()
     {
         //
-        return view('admin.transaksi.index',['title'=>'Gaun']);    
+        $pemesanan = PemesananGaun::all();
+        return view('admin.transaksi.index',['title'=>'Gaun', 'pemesanan'=>$pemesanan]);    
+    }
+    
+    public function indexAjax()
+    {
+        $data = PemesananGaun::all();
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => view('admin.transaksi.table_gaun',compact('data'))->render()
+        ), 200);
+        // return Datatables::of($data)->make(true);
     }
 
     /**
