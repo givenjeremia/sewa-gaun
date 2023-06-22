@@ -102,11 +102,32 @@ class PenyewaanPeriasController extends Controller
         $query = '%'.$request->get('query').'%';
         $date_now = Carbon::now()->timezone('Asia/Jakarta')->toDateString();
     
-        // $gaun = Gaun::where('nama', 'like', $query)->paginate(8);
-        // return response()->json(array(
-        //     'status' => 'oke',
-        //     'msg' => view('client.penyewaan_gaun.data',compact('gaun','date_now'))->render()
-        // ), 200);
+        $perias = Perias::where('nama', 'like', $query)->paginate(8);
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => view('client.penyewaan_mua.data',compact('perias','date_now'))->render()
+        ), 200);
+    }
+
+    public function filterKategori(Request $request){
+        $kategori = $request->get('kategori');
+        $date_now = Carbon::now()->timezone('Asia/Jakarta')->toDateString();
+        
+        if($kategori == 'all'){
+            $perias = Perias::paginate(8);
+            return response()->json(array(
+                'status' => 'oke',
+                'msg' => view('client.penyewaan_mua.data',compact('perias','date_now'))->render()
+            ), 200);
+        }
+        else{
+            $perias = Perias::where('kategori_perias_id',$kategori)->paginate(8);
+            return response()->json(array(
+                'status' => 'oke',
+                'msg' => view('client.penyewaan_mua.data',compact('perias','date_now'))->render()
+            ), 200);
+        }
+       
     }
     
     

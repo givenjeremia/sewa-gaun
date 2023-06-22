@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\PembayaranPerias;
+use App\Models\PemesananPerias;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
@@ -18,9 +19,19 @@ class PembayaranPeriasController extends Controller
     public function index()
     {
         //
-        
-        return view('admin.transaksi.index',['title'=>'Perias']);
+        $pemesanan = PemesananPerias::all();
+        return view('admin.transaksi.index',['title'=>'Perias','pemesanan'=>$pemesanan]);
     }
+
+    public function indexAjax()
+    {
+        $data = PemesananPerias::all();
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => view('admin.transaksi.table_perias',compact('data'))->render()
+        ), 200);
+    }
+
 
     /**
      * Show the form for creating a new resource.

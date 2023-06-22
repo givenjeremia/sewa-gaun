@@ -8,8 +8,27 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
-        
+          <form id="FormTambahJadwal">
+            <input type="hidden" value="{{ csrf_token() }}" name="data_page_tambah_jadwal">
+            @if($role == 'gaun')
+            <div class="form-group">
+              <label for="exampleInputEmail1">Gaun</label>
+              <select name="gaun" class="form-control">
+                @foreach($gaun as $key => $value)
+                  <option value="{{ $value->id }}">{{ $value->nama }}</option>
+                @endforeach
+              </select>
+            </div>
+            @else
+            <div class="form-group">
+              <label for="exampleInputEmail1"></label>
+              <select name="gaun" class="form-control">
+                @foreach($gaun as $key => $value)
+                  <option value="{{ $value->id }}">{{ $value->nama }}</option>
+                @endforeach
+              </select>
+            </div>
+            @endif
               <div class="form-group">
                 <label for="exampleInputEmail1">Tanggal</label>
                 <input type="date" class="form-control" required>
@@ -27,7 +46,7 @@
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary" onclick="tambahJadwal('{{ $role }}')">Save changes</button>
         </div>
       </div>
       <!-- /.modal-content -->

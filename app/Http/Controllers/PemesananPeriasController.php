@@ -28,13 +28,15 @@ class PemesananPeriasController extends Controller
     }
 
     public function indexStatus( $status ) {
+        $user = Auth::user();
+        // dd($status);
         $pemesananPerias = [];
         if ( $status == 3 ) {
-            $pemesananPerias = PemesananPerias::paginate( 5 );
-            ;
-        } else {
-            $pemesananPerias = PemesananPerias::where( 'status', $status )->paginate( 5 );
+            $pemesananPerias = PemesananPerias::where('users_id',$user->id)->paginate(5);
+        
 
+        } else {
+            $pemesananPerias = PemesananPerias::where( 'status', $status )->where('users_id',$user->id)->paginate(5);
         }
         $list_status = [
             2=> 'Sudah Melakukan Pembayaran',

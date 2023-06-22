@@ -123,7 +123,7 @@
             </tr>
             <tr>
                 <td>
-                    {{ $pemesanan->tanggaL_event }}
+                    {{ $pemesanan->tanggal_event }}
                 </td>
                 <td>
                     {{ $pemesanan->jam_event }}

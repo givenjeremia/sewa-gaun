@@ -17,6 +17,7 @@
     <div class="col">
 
         <div class="form-group">
+            <input type="hidden" id="jenis" value="{{ $role }}">
             <input type="month" id="sort_by" class="form-control" name="sort_by" required>
         </div>
 
@@ -37,21 +38,44 @@
 </div>
 
 @if ($role == 'Perias')
-@include('admin/jadwal/perias')
+<div id="table-perias">
+    @include('admin/jadwal/perias')
+</div>
 @else
-@include('admin/jadwal/gaun')
+<div id="table-gaun">
+    @include('admin/jadwal/gaun')
+</div>
 @endif
 
 
 
 <br>
 
+{{-- <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog" id="modal-dialog" role="document">
+      <div class="modal-content" id="modalContentDetail">
+       
+      </div>
+    </div>
+</div> --}}
+
+
+<div class="modal fade" id="modal-xl">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content" id="modalContentDetail">
+       
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
 @include('admin/jadwal/tambah')
 
 @endsection
 
 @section('js_admin')
-<script>
-</script>
+@section('js_admin')
+<script src="{{ asset('js/admin_js/jadwal.js') }}"></script>
+@endsection
 @endsection
 

@@ -13,9 +13,9 @@ var page = $("#penyewaan_perias_page").val();
 // Get Data
 function getData() {}
 
-$("#input-search-gaun").on("keyup change", function () {
+$("#input-search-perias").on("keyup change", function () {
     var query = $(this).val();
-    url = "/cari-gaun";
+    url = "/cari-perias";
     $.ajax({
         url: url,
         type: "POST",
@@ -30,6 +30,23 @@ $("#input-search-gaun").on("keyup change", function () {
     });
 });
 
+$(".kategori_perias").on('change', function() {
+    // Perform actions when the radio button selection changes
+    var selectedValue = $(this).val(); // Get the value of the selected radio button
+    url = "/kategori-perias";
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: {
+            _token: page,
+            kategori: selectedValue,
+        },
+        success: function (data) {
+            $("#data").html();
+            $("#data").html(data.msg);
+        },
+    });
+});
 
 function getDetailPerias(id) {
     url = "/penyewaan-perias/" + id;

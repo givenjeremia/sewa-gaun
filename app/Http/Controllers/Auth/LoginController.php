@@ -31,21 +31,18 @@ class LoginController extends Controller
     public function redirectTo()
     {
         $role = Auth::user()->roles;
-        
-        switch ($role) {
-            case 0:
-                return '/admin/gaun';
-                break;
-            case 1:
-                return '/admin/gaun';
-                break;
-            case 2:
-                return '/admin/perias';
-                break;
-            default:
-                return '/';
-                break;
+        // dd($role);
+        if($role == 0 || $role == 1){
+            // dd("masu");
+            return '/admin/gaun';
         }
+        elseif($role ==2){
+            return '/admin/perias';
+        }
+        else{
+            return '/admin/perias'; 
+        }
+        
     }
 
     /**

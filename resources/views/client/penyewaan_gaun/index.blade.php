@@ -13,10 +13,39 @@
     </div>
 </div>
 
-<div id="data" class="m-4">
-    @include('client/penyewaan_gaun/data')
+<div class="row my-4">
+    <div class="col-md-2">
+      <div class="card card-primary card-outline me-2">
+        <div class="card-body pt-2">
+          <h3 class="profile-username text-center mb-3">Kategori</h3>
+          <div class="form-check">
+            <input class="form-check-input kategori_gaun" type="radio"  type="radio" name="kategori_gaun" value="all" checked>
+            <label class="form-check-label" for="flexRadioDefault1">
+              Semua
+            </label>
+          </div>
+          @foreach($kategori as $key => $value)
+          <div class="form-check">
+            <input class="form-check-input kategori_gaun" " type="radio" name="kategori_gaun" value="{{ $value->id }}">
+            <label class="form-check-label" for="flexRadioDefault1">
+              {{ $value->nama }}
+            </label>
+          </div>
+            
+          @endforeach
+         
+        </div>
+        <!-- /.card-body -->
+      </div>
+    </div>
+    <!-- /.col -->
+    <div class="col-md-10">
+        <div id="data">
+            @include('client/penyewaan_gaun/data')
+        </div>
+    </div>
+    <!-- /.col -->
 </div>
-
 
 {{-- Detail Gambar Gaun --}}
 <div class="modal fade" id="detailGaun" data-bs-scroll="true" tabindex="-1" role="basic" aria-hidden="true">

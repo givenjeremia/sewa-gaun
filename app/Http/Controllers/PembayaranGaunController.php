@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\PembayaranGaun;
 use App\Models\PemesananGaun;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
@@ -19,6 +20,7 @@ class PembayaranGaunController extends Controller
     public function index()
     {
         //
+    
         $pemesanan = PemesananGaun::all();
         return view('admin.transaksi.index',['title'=>'Gaun', 'pemesanan'=>$pemesanan]);    
     }
@@ -30,7 +32,6 @@ class PembayaranGaunController extends Controller
             'status' => 'oke',
             'msg' => view('admin.transaksi.table_gaun',compact('data'))->render()
         ), 200);
-        // return Datatables::of($data)->make(true);
     }
 
     /**
@@ -75,6 +76,10 @@ class PembayaranGaunController extends Controller
             $new->pemesanan_gaun_id  = $request->get('pemesanan_gaun_id');
             $new->status_pembayaran = 0;
             $new->save();
+            // Update Status In Pemesanan 
+            $pemesanan = PemesananGaun::find($request->get('pemesanan_gaun_id'));
+            $pemesanan->status = 2;
+            $pemesanan->save();
             $id_pembayaran_baru = $new->id;
             // Add Gambar
             $bukti_pembayaran = $request->file('bukti_pembayaran');

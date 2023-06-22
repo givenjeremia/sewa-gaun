@@ -33,7 +33,7 @@
          
             <li><a href="{{url('admin/gaun')}}" class="dropdown-item">Data</a></li>
             <li><a href="{{url('admin/kategory-gaun')}}" class="dropdown-item">Kategori</a></li>
-            <li><a href="{{url('admin/jadwal')}}" class="dropdown-item">Jadwal</a></li>
+            <li><a href="{{url('admin/jadwals/gaun')}}" class="dropdown-item">Jadwal</a></li>
           </ul>
         </li>
         {{-- Drop Down Absensi --}}
@@ -43,7 +43,7 @@
           <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow">
             <li><a href="{{url('admin/perias')}}" class="dropdown-item">Data</a></li>
             <li><a href="{{url('admin/kategory-perias')}}" class="dropdown-item">Kategori</a></li>
-            <li><a href="{{url('admin/jadwal')}}" class="dropdown-item">Jadwal</a></li>
+            <li><a href="{{url('admin/jadwals/perias')}}" class="dropdown-item">Jadwal</a></li>
           </ul>
         </li>
 

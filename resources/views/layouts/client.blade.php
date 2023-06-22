@@ -27,7 +27,7 @@
             <a href="{{ url('penyewaan-gaun') }}" class="nav-link text-bold  {{ Request::is('penyewaan-gaun') ? 'active' : '' }} ">Persewaan Gaun</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{ url('penyewaan-mua') }}" class="nav-link text-bold {{ Request::is('penyewaan-mua') ? 'active' : '' }} ">Mackup Artis</a>
+            <a href="{{ url('penyewaan-mua') }}" class="nav-link text-bold {{ Request::is('penyewaan-mua') ? 'active' : '' }} ">Makeup Artis</a>
         </li>
         
         @if (Auth::user())

@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Gaun;
-use App\Models\KatergoryPerias;
+use App\Models\KategoriGaun;
 use Illuminate\Http\Request;
 use App\Models\PenyewaanGaun;
+use App\Models\KatergoryPerias;
 
 class PenyewaanGaunController extends Controller
 {
@@ -23,7 +24,9 @@ class PenyewaanGaunController extends Controller
         $date_now = Carbon::now()->timezone('Asia/Jakarta')->toDateString();
         // Cek Jadwal Gaun 
         $gaun = Gaun::paginate(8);
-        return view('client.penyewaan_gaun.index',compact('gaun','date_now' ));
+        // 
+        $kategori = KategoriGaun::all();
+        return view('client.penyewaan_gaun.index',compact('gaun','date_now','kategori'));
     }
 
     /**
@@ -103,6 +106,37 @@ class PenyewaanGaunController extends Controller
     public function destroy(PenyewaanGaun $penyewaanGaun)
     {
         //
+    }
+
+    public function cariGaun(Request $request){
+        $date_now = Carbon::now()->timezone('Asia/Jakarta')->toDateString();
+        $query = '%'.$request->get('query').'%';
+        $gaun = Gaun::where('nama', 'like', $query)->paginate(8);
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => view('client.penyewaan_gaun.data',compact('gaun','date_now'))->render()
+        ), 200);
+    }
+
+    public function filterKategori(Request $request){
+        $kategori = $request->get('kategori');
+        $date_now = Carbon::now()->timezone('Asia/Jakarta')->toDateString();
+        
+        if($kategori == 'all'){
+            $gaun = Gaun::paginate(8);
+            return response()->json(array(
+                'status' => 'oke',
+                'msg' => view('client.penyewaan_gaun.data',compact('gaun','date_now'))->render()
+            ), 200);
+        }
+        else{
+            $gaun = Gaun::where('kategori_gaun_id',$kategori)->paginate(8);
+            return response()->json(array(
+                'status' => 'oke',
+                'msg' => view('client.penyewaan_gaun.data',compact('gaun','date_now'))->render()
+            ), 200);
+        }
+       
     }
 
    

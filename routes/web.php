@@ -25,10 +25,14 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 // Client - Gaun
 Route::resource('penyewaan-gaun', App\Http\Controllers\PenyewaanGaunController::class);
 Route::post('cari-gaun', [App\Http\Controllers\PenyewaanGaunController::class,'cariGaun']);
+Route::post('kategori-gaun', [App\Http\Controllers\PenyewaanGaunController::class,'filterKategori']);
+
 Route::get('penyewaan-gaun/create/{id}', [App\Http\Controllers\PenyewaanGaunController::class,'create']);
 // Client - Gaun 
 Route::resource('penyewaan-perias', App\Http\Controllers\PenyewaanPeriasController::class);
 Route::get('penyewaan-perias/create/{id}', [App\Http\Controllers\PenyewaanPeriasController::class,'create']);
+Route::post('cari-perias', [App\Http\Controllers\PenyewaanPeriasController::class,'cariPerias']);
+Route::post('kategori-perias', [App\Http\Controllers\PenyewaanPeriasController::class,'filterKategori']);
 
 
 // Pemesanan
@@ -73,9 +77,14 @@ Route::prefix('admin/')->group(function () {
     Route::resource('gambar-rias', App\Http\Controllers\GambarRiasController::class);
     Route::resource('hasil-rias', App\Http\Controllers\HasilRiasController::class);
     Route::resource('jadwal', App\Http\Controllers\JadwalController::class);
+    Route::get('jadwals/{jenis}', [App\Http\Controllers\JadwalController::class,'index']);
+    Route::post('jadwal-ajax', [App\Http\Controllers\JadwalController::class,'indexAjax']);
+    Route::get('jadwal-sort-gaun/{sort_by}', [App\Http\Controllers\JadwalController::class,'jadwalSortGaun']);
+    Route::get('jadwal-sort-perias/{sort_by}', [App\Http\Controllers\JadwalController::class,'jadwalSortPerias']);
+    Route::get('get-detail-gaun/{tanggal}', [App\Http\Controllers\JadwalController::class,'getDetailGaun']);
+    Route::get('get-detail-perias/{tanggal}', [App\Http\Controllers\JadwalController::class,'getDetailPerias']);
     Route::resource('kategory-perias', App\Http\Controllers\KategoryPeriasController::class);
     Route::resource('kategory-gaun', App\Http\Controllers\KategoriGaunController::class);
-
 
     // Ajax
     Route::get('gaunAjax', [App\Http\Controllers\GaunController::class,'indexAjax']);
@@ -83,7 +92,6 @@ Route::prefix('admin/')->group(function () {
     Route::get('kategoriPeriasAjax', [App\Http\Controllers\KategoryPeriasController::class,'indexAjax']);
     Route::get('kategoriGaunAjax', [App\Http\Controllers\KategoriGaunController::class,'indexAjax']);
     Route::get('paketAjax', [App\Http\Controllers\PaketController::class,'indexAjax']);
-
 
     // Pemesanan
     Route::resource('pemesanan-gaun', App\Http\Controllers\PemesananGaunController::class);

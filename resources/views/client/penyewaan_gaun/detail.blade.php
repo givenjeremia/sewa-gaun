@@ -26,28 +26,43 @@
         </a>
     </div>
     <div class="detail mt-2">
-        <div class="table-responsive">
-            <table id="gambar_gaun_tabel" class="table">
-                <tr>
-                    <td width="15%">
-                        Harga Sewa
-                    </td>
-                    <td>:</td>
-                    <td>
-                        <span class=" text-gray">Rp {{ number_format($gaun->harga_sewa) }}</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="15%">
-                        Deskripsi
-                    </td>
-                    <td>:</td>
-                    <td>
-                        <p class="text-justify">{{ $gaun->deskripsi }}</p>
-                    </td>
-                </tr>
-            </table>
-        </div>
+        <ul class="nav nav-tabs" id="myTabs">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#tab1">Detail</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#tab2">Jadwal</a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="tab1">
+                <div class="table-responsive">
+                    <table id="gambar_gaun_tabel" class="table">
+                        <tr>
+                            <td width="15%">
+                                Harga Sewa
+                            </td>
+                            <td>:</td>
+                            <td>
+                                <span class=" text-gray">Rp {{ number_format($gaun->harga_sewa) }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="15%">
+                                Deskripsi
+                            </td>
+                            <td>:</td>
+                            <td>
+                                <p class="text-justify">{{ $gaun->deskripsi }}</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab2">
+              <h3>Content for Jadwal</h3>
+            </div>
+          </div>
     </div>
 </div>
 

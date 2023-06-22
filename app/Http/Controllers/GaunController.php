@@ -52,38 +52,43 @@ class GaunController extends Controller
     public function store(Request $request)
     {
         //
-        $gambars = $request->file('gambar');
-        // dd($gambars);
-        $gaun = new Gaun();
-        $gaun->nama = $request->get('nama');
-        $gaun->harga_sewa = $request->get('harga');
-        $gaun->deskripsi = $request->get('deskripsi');
-        $gaun->kategori_gaun_id = $request->get('kategori_gaun');
-        $gaun->save();
-        $id_new_gaun = $gaun->id;
-        // Proses Gambar
-        foreach ($gambars as $value) {
-            # code...
-            $path = public_path('gambar/gaun/' . $id_new_gaun);
-            //Get filename
-            // dd($value);
-            $fileName = $value->getClientOriginalName();
-    
-            //Checking file directory path if path is doesnt exist move to the path.
-            if (!File::isDirectory($path)) {
-                File::makeDirectory($path, 0777, true, true);
-                $value->move($path, $fileName);
-            } else {
-                $value->move($path, $fileName);
-                
+        try {
+            $gambars = $request->file('gambar');
+            // dd($gambars);
+            $gaun = new Gaun();
+            $gaun->nama = $request->get('nama');
+            $gaun->harga_sewa = $request->get('harga');
+            $gaun->deskripsi = $request->get('deskripsi');
+            $gaun->kategori_gaun_id = $request->get('kategori_gaun');
+            $gaun->save();
+            $id_new_gaun = $gaun->id;
+            // Proses Gambar
+            foreach ($gambars as $value) {
+                # code...
+                $path = public_path('gambar/gaun/' . $id_new_gaun);
+                //Get filename
+                // dd($value);
+                $fileName = $value->getClientOriginalName();
+        
+                //Checking file directory path if path is doesnt exist move to the path.
+                if (!File::isDirectory($path)) {
+                    File::makeDirectory($path, 0777, true, true);
+                    $value->move($path, $fileName);
+                } else {
+                    $value->move($path, $fileName);
+                    
+                }
+                // Add To Database
+                $gambar_gaun = new GambarGaun();
+                $gambar_gaun->nama_file = $fileName;
+                $gambar_gaun->gaun_id = $id_new_gaun;
+                $gambar_gaun->save();
             }
-            // Add To Database
-            $gambar_gaun = new GambarGaun();
-            $gambar_gaun->nama_file = $fileName;
-            $gambar_gaun->gaun_id = $id_new_gaun;
-            $gambar_gaun->save();
+            return response()->json(array('status' => 'success', 'msg' => 'Gaun '.$request->get('nama').' Berhasil Di Tambahkan'), 200);
+        } catch (\Throwable $e) {
+            return response()->json(array('status' => 'error', 'msg' => 'Harap Periksa Inputan'), 200);
         }
-        return response()->json(array('status' => 'success', 'msg' => 'Gaun '.$request->get('nama').' Berhasil Di Tambahkan'), 200);
+
     }
 
     /**

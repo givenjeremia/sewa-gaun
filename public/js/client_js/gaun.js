@@ -29,12 +29,23 @@ $("#input-search-gaun").on("keyup change", function () {
         },
     });
 });
-
-// function getDays(date1, date2) {
-//     let difference = date2.getTime() - date1.getTime();
-//     let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
-//     return TotalDays + 1;
-// }
+$(".kategori_gaun").on('change', function() {
+    // Perform actions when the radio button selection changes
+    var selectedValue = $(this).val(); // Get the value of the selected radio button
+    url = "/kategori-gaun";
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: {
+            _token: page,
+            kategori: selectedValue,
+        },
+        success: function (data) {
+            $("#data").html();
+            $("#data").html(data.msg);
+        },
+    });
+});
 
 function getDetailGaun(id) {
     url = "/penyewaan-gaun/" + id;

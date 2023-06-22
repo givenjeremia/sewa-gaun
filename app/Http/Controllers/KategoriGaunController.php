@@ -47,11 +47,18 @@ class KategoriGaunController extends Controller
     public function store(Request $request)
     {
         //
-        $katergoriGaun = new KategoriGaun();
-        $katergoriGaun->nama = $request->get('nama');
-        $katergoriGaun->desc =  $request->get('desc');
-        $katergoriGaun->save();
-        return response()->json(array('status' => 'success', 'msg' => 'Kategori Gaun '.$request->get('nama').' Berhasil Di Tambahkan'), 200);
+        try {
+            $katergoriGaun = new KategoriGaun();
+            $katergoriGaun->nama = $request->get('nama');
+            $katergoriGaun->desc =  $request->get('desc');
+            $katergoriGaun->save();
+            return response()->json(array('status' => 'success', 'msg' => 'Kategori Gaun '.$request->get('nama').' Berhasil Di Tambahkan'), 200);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json(array('status' => 'error', 'msg' => 'Kategori Gaun Gagal Di Tambahkan Harap Periksa Inputan'), 200);
+
+        }
+
     }
 
     /**
@@ -91,11 +98,18 @@ class KategoriGaunController extends Controller
     public function update(Request $request, $kategoriGaun)
     {
         //
-        $kategoriGaun = KategoriGaun::find($kategoriGaun);
-        $kategoriGaun->nama = $request->get('nama');
-        $kategoriGaun->desc =  $request->get('desc');
-        $kategoriGaun->save();
-        return response()->json(array('status' => 'success', 'msg' => 'Kategori Gaun '.$request->get('nama').' Berhasil Di Update'), 200);
+        try {
+            $kategoriGaun = KategoriGaun::find($kategoriGaun);
+            $kategoriGaun->nama = $request->get('nama');
+            $kategoriGaun->desc =  $request->get('desc');
+            $kategoriGaun->save();
+            return response()->json(array('status' => 'success', 'msg' => 'Kategori Gaun '.$request->get('nama').' Berhasil Di Update'), 200);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json(array('status' => 'error', 'msg' => 'Kategori Gaun Gagal Di Update Harap Periksa Inputan'), 200);
+
+        }
+
     }
 
     /**

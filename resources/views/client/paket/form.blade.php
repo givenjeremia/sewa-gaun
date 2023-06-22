@@ -18,7 +18,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Telepon</label>
-                    <input type="number" name="telepon" value="{{ Auth::user()->telepon }}" class="form-control" id="exampleInputPassword1" placeholder="Masukan Nomor Telepon">
+                    <input type="number" name="telepon" value="{{ Auth::user()->telp }}" class="form-control" id="exampleInputPassword1" placeholder="Masukan Nomor Telepon">
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
