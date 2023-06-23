@@ -66,6 +66,12 @@ Route::get('paket/create/{id}', [App\Http\Controllers\PaketController::class,'cr
 Route::resource('pemesanan-paket', App\Http\Controllers\PemesananPaketController::class);
 Route::post('pembayaran-paket', [App\Http\Controllers\PemesananPaketController::class,'pembayaranPaket']);
 
+// Jadwal
+Route::get('list-jadwal', [App\Http\Controllers\HomeController::class, 'indexJadwal']);
+Route::get('list-jadwal-ajax', [App\Http\Controllers\HomeController::class, 'indexJadwalAjax']);
+Route::get('jadwal-sort/{start}/{end}', [App\Http\Controllers\HomeController::class, 'indexJadwal']);
+Route::get('get-detail-gaun/{tanggal}', [App\Http\Controllers\JadwalController::class,'getDetailGaun']);
+Route::get('get-detail-perias/{tanggal}', [App\Http\Controllers\JadwalController::class,'getDetailPerias']);
 
 
 

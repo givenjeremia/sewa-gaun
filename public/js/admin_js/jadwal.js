@@ -41,7 +41,7 @@ function getDetailJadwal(jenis,tanggal) {
 function tambahJadwal(jenis) {
     // FormTambahJadwa
     var form_data = new FormData();
-    form_data.append("_method", "PUT");
+    form_data.append("_method", "POST");
     $("form#FormTambahJadwal :input").each(function () {
         var inputName = $(this).attr("name");
         var inputValue = $(this).val();
@@ -70,8 +70,22 @@ function tambahJadwal(jenis) {
                     icon: "success",
                     showConfirmButton: false,
                 }).then((result) => {
-                    $("#modal-lg").modal("hide");
-                    getData();
+                    $("#modal-sm").modal("hide");
+                    if(jenis == 'gaun'){
+                        url = "/admin/jadwal-sort-gaun/"+data.month;
+                    }
+                    else{
+                        url = "/admin/jadwal-sort-perias/"+data.month;
+                    }
+                    $.ajax(url, // request url
+                        {
+                            dataType: 'json', // type of response data // timeout milliseconds
+                            success: function (data,status,xhr) {   // success callback function
+                                $('#table-'+jenis).html("");
+                                $('#table-'+jenis).html(data.msg);
+                            },
+                    });
+
                 });
             } else {
                 Swal.fire({

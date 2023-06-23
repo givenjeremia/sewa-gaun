@@ -77,10 +77,10 @@ class JadwalController extends Controller
 
             }           
         }
-        
+        $role = 'gaun';
         return response()->json(array(
             'status' => 'oke',
-            'msg' => view('admin.jadwal.gaun',compact('date_1_month'))->render()
+            'msg' => view('admin.jadwal.gaun',compact('date_1_month','role'))->render()
         ), 200);
     }
     public function jadwalSortPerias($sort_by)
@@ -106,22 +106,25 @@ class JadwalController extends Controller
 
             }           
         }
+        $role = 'gaun';
         return response()->json(array(
             'status' => 'oke',
-            'msg' => view('admin.jadwal.gaun',compact('date_1_month'))->render()
+            'msg' => view('admin.jadwal.gaun',compact('date_1_month','role'))->render()
         ), 200);
     }
 
     public function getDetailPerias($tanggal){
-        $jadwal = Jadwal::whereDate('tanggal_waktu', 'like',$tanggal.'%')->where('perias_id','!=',null)->first();
+        
+        $jadwal = Jadwal::whereDate('tanggal_waktu', 'like',$tanggal.'%')->where('perias_id','!=',null)->get();
         $jenis = 'perias';
+        // dd($jadwal);
         return response()->json(array(
             'status' => 'oke',
-            'msg' => view('admin.jadwal.detail_jadwal',compact('jadwal','jenis'))->render()
+            'msg' => view('admin.jadwal.detail_jadwal',compact('jadwal','jenis','tanggal'))->render()
         ), 200);
     }
 
-    public function getDetailGaun($tanggal){
+public function getDetailGaun($tanggal){
         $jadwal = Jadwal::whereDate('tanggal_waktu', 'like',$tanggal.'%')->where('gaun_id','!=',null)->get();
         // dd($jadwal);
         $jenis = 'gaun';
@@ -152,9 +155,34 @@ class JadwalController extends Controller
     {
         //
         try {
-            
+            if($request->get('jenis')== 'gaun'){
+                $new = new Jadwal();
+                $new->gaun_id = $request->get('gaun');
+                $new->keterangan = $request->get('keterangan');
+                $combine = $request->get('tanggal').' '.$request->get('waktu');
+                $new->tanggal_waktu = $combine;
+                $new->status = 1;
+                $new->save();
+                $split = explode("-",$request->get('tanggal'));
+
+                $month = $split[0].'-'.$split[1];
+                return response()->json(array('status' => 'success', 'msg' => 'Jadwal Gaun Berhasil Di Tambahkan','month' => $month), 200);
+            }
+            else{
+                $new = new Jadwal();
+                $new->perias_id = $request->get('perias');
+                $new->keterangan = $request->get('keterangan');
+                $combine = $request->get('tanggal').' '.$request->get('waktu');
+                $new->tanggal_waktu = $combine;
+                $new->status = 1;
+                $new->save();
+                $split = explode("-",$request->get('tanggal'));
+                $month = $split[0].'-'.$split[1];
+                return response()->json(array('status' => 'success', 'msg' => 'Jadwal Perias Berhasil Di Tambahkan','month' => $month), 200);
+            }
         } catch (\Throwable $th) {
-            //throw $th;
+            //throw $th;'
+            return response()->json(array('status=' => 'error', 'msg' => 'Data Jadwal Gagal Di Tambahkan Harap Periksa Inputan'), 200);
         }
     }
 

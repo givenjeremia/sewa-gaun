@@ -31,11 +31,11 @@
             @endif
               <div class="form-group">
                 <label for="exampleInputEmail1">Tanggal</label>
-                <input type="date" class="form-control" required>
+                <input type="date" class="form-control" name="tanggal" required>
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Jam</label>
-                <input type="time" class="form-control" required>
+                <input type="time" class="form-control" name="jam" required>
               </div>
 
               <div class="form-group">

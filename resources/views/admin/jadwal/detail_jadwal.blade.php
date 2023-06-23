@@ -34,11 +34,34 @@
             </tfoot>
           </table>
         
- 
     </div> 
     @else
     <div class="table-responsive">
-        <h3>Ada Jadwal Perias</h3>
+      <table id="example1" class="table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th>No</th>
+          <th>Nama</th>
+          <th>Deskripsi</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach ($jadwal as $key => $item)
+        <tr>
+          <td>{{ $key +1 }}</td>
+          <td>{{  $item->perias->nama  }}</td>
+          <td>{{ $item->keterangan }}</td>
+        </tr>
+        @endforeach
+        </tbody>
+        <tfoot>
+        <tr>
+          <th>No</th>
+          <th>Nama</th>
+          <th>Deskripsi</th>
+        </tr>
+        </tfoot>
+      </table>
     </div> 
     @endif
     

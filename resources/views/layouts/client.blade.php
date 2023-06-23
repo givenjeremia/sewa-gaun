@@ -29,6 +29,9 @@
         <li class="nav-item d-none d-sm-inline-block">
             <a href="{{ url('penyewaan-mua') }}" class="nav-link text-bold {{ Request::is('penyewaan-mua') ? 'active' : '' }} ">Makeup Artis</a>
         </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="{{ url('list-jadwal') }}" class="nav-link text-bold {{ Request::is('list-jadwal') ? 'active' : '' }} ">Jadwal</a>
+        </li>
         
         @if (Auth::user())
         <li class="nav-item dropdown">
