@@ -68,7 +68,8 @@
     @if ($pemesanan->status == 1)
         <button type="button" class="btn btn-default text-white" onclick="getPembayaranForm({{$pemesanan->id}})" style="background-color:#89375F" {{ Auth::user() ? '' : 'disabled' }} >Bayar</button>
     @elseif($pemesanan->status == 2)
-        <button type="button" class="btn btn-default text-white" onclick="getReviewForm({{$pemesanan->id}})" style="background-color:#89375F" {{ Auth::user() ? '' : 'disabled' }} >Review</button>
+    <button type="button" class="btn btn-default text-white" onclick="getKomplainForm({{$pemesanan->id}})" style="background-color:#89375F" {{ Auth::user() ? '' : 'disabled' }} >Komplain</button>
+    <button type="button" class="btn btn-default text-white" onclick="getReviewForm({{$pemesanan->id}})" style="background-color:#89375F" {{ Auth::user() ? '' : 'disabled' }} >Review</button>
     @else
         
     @endif

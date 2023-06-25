@@ -128,7 +128,7 @@ function submitPembayaran(id) {
         form_data.append("sisa_pembayaran", sisa_pembayaran);
         form_data.append("bukti_pembayaran", bukti_pembayaran[0]);
         form_data.append("metode_pembayaran", metode_pembayaran);
-        form_data.append("pemesanan_perias_id", id);
+        form_data.append("pemesanan_gaun_id", id);
         url = "/pembayaran-gaun";
         $.ajax({
             url: url,
@@ -169,4 +169,38 @@ function submitPembayaran(id) {
             showConfirmButton: true,
         });
     }
+}
+
+// komplain
+
+function getKomplainForm(id){
+    url = "/komplain/create/gaun/" + id;
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function (data) {
+            $("#detailTransaksi").on("hidden.bs.modal", function () {
+                $("#komplain").modal("show");
+                $("#modalContentKomplain").html(data.msg);
+            });
+            $("#detailTransaksi").modal("hide");
+        },
+    });
+}
+
+
+
+function getReviewForm(id){
+    url = "/rating-review/create/gaun/" + id;
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function (data) {
+            $("#detailTransaksi").on("hidden.bs.modal", function () {
+                $("#rating_review").modal("show");
+                $("#modalContentRatingReview").html(data.msg);
+            });
+            $("#detailTransaksi").modal("hide");
+        },
+    });
 }

@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Komplain;
 use Illuminate\Http\Request;
+use App\Models\PemesananGaun;
+use App\Models\PembayaranGaun;
+use App\Models\PemesananPaket;
+use App\Models\PemesananPerias;
 
 class KomplainController extends Controller
 {
@@ -22,9 +26,22 @@ class KomplainController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($jenis,$pemesanan_id)
     {
         //
+        if($jenis == 'gaun'){
+            $pemesanan = PemesananGaun::find($pemesanan_id);
+        }
+        elseif($jenis == 'perias'){
+            $pemesanan = PemesananPerias::find($pemesanan_id);
+        }
+        else{
+            $pemesanan = PemesananPaket::find($pemesanan_id);
+        }
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => view('client.transaksi.komplain', compact('pemesanan','jenis'))->render()
+        ), 200);
     }
 
     /**
@@ -36,6 +53,50 @@ class KomplainController extends Controller
     public function store(Request $request)
     {
         //
+        try {
+            if($request->get('jenis') == 'gaun'){
+                $new = new Komplain();
+                $new->jenis_komplain = $request->get('jenis_komplain');
+                $new->keterangan = $request->get('keterangan');
+                $new->nomor_pemesanan = $request->get('nomor_pemesanan');
+                $new->gaun_id = $request->get('gaun_id');
+                $new->save();
+                return response()->json(array(
+                    'status' => 'success',
+                    'msg' => "Komplain Berhasil Di Tambahkan"
+                ), 200);
+            }
+            else if($request->get('jenis') == 'perias'){
+                $new = new Komplain();
+                $new->jenis_komplain = $request->get('jenis_komplain');
+                $new->keterangan = $request->get('keterangan');
+                $new->nomor_pemesanan = $request->get('nomor_pemesanan');
+                $new->perias_id = $request->get('perias_id');
+                $new->save();
+                return response()->json(array(
+                    'status' => 'success',
+                    'msg' => 'Komplain Berhasil Di Tambahkan'
+                ), 200);
+            }
+            else{
+                $new = new Komplain();
+                $new->jenis_komplain = $request->get('jenis_komplain');
+                $new->keterangan = $request->get('keterangan');
+                $new->nomor_pemesanan = $request->get('nomor_pemesanan');
+                $new->save();
+                return response()->json(array(
+                    'status' => 'success',
+                    'msg' => 'Komplain Berhasil Di Tambahkan'
+                ), 200);
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json(array(
+                'status' => 'errorr',
+                'msg' => 'Komplain Gagal Di Tambahkan'
+            ), 200);
+        }
+       
     }
 
     /**

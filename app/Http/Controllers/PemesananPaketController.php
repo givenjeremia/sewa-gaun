@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Paket;
 use App\Models\Jadwal;
+use App\Models\Komplain;
+use App\Models\RatingReview;
 use Illuminate\Http\Request;
+use App\Models\PemesananGaun;
 use App\Models\PemesananPaket;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +37,7 @@ class PemesananPaketController extends Controller
             $pemesananPaket = PemesananPaket::paginate( 5 );
             ;
         } else {
-            $pemesananPaket = PemesananPaket::where( 'status', $status )->paginate( 5 );
+            $pemesananPaket = PemesananPaket::where( 'status_pembayaran', $status )->paginate( 5 );
 
         }
         $list_status = [
@@ -197,7 +200,7 @@ class PemesananPaketController extends Controller
             $pemesananPaket->status_pembayaran = 2;
             $pemesananPaket->save();
             $bukti_pembayaran = $request->file('bukti_pembayaran');
-            $path = public_path('transaksi/perias/' .$pemesananPaket->id);
+            $path = public_path('transaksi/paket/' .$pemesananPaket->id);
             $fileName = $pemesananPaket->nomor_pemesanan.'-'.$bukti_pembayaran->getClientOriginalName();
             if (!File::isDirectory($path)) {
                 File::makeDirectory($path, 0777, true, true);
@@ -245,6 +248,56 @@ class PemesananPaketController extends Controller
 
     }
 
+    public function indexTransaksi(){
+        return view('admin.transaksi.paket.index');  
+    }
+
+    public function indexTransaksiAjax(){
+        $pemesanan = PemesananPaket::all();
+        // dd($data);
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => view('admin.transaksi.paket.table',compact('pemesanan'))->render()
+        ), 200);
+    }
+
+    public function detailTransaksiAdmin($id){
+        $pemesanan = PemesananPaket::find($id);
+        $komplain = Komplain::where('nomor_pemesanan', $pemesanan->nomor_pemesanan)->get();
+        $rating_review = RatingReview::where('nomor_pemesanan',$pemesanan->nomor_pemesanan)->get();
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => view('admin.transaksi.paket.detail',compact('pemesanan','komplain','rating_review'))->render()
+        ), 200); 
+    }
+
+
+    public function formVerifPembayaran($id){
+        $pemesanan = PemesananPaket::find($id);
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => view('admin.transaksi.paket.verif',compact('pemesanan'))->render()
+        ), 200);
+    }
+
+    public function verifyPembayaran(Request $request){
+        try {
+            $pemesanan_id = $request->get('pemesanan_id');
+            $pembayaranPaket = PemesananPaket::find($pemesanan_id);
+            $pembayaranPaket->verif = now();
+            $pembayaranPaket->save();
+            return response()->json(array(
+                'status' => 'success',
+                'msg' => 'Verify Pembayaran Berhasil'
+            ), 200);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json(array(
+                'status' => 'error',
+                'msg' => 'Verify Pembayaran Gagal'
+            ), 200);
+        }
+    }
 
 
 

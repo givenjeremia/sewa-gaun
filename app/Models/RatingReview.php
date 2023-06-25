@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class RatingReview extends Model
 {
     use HasFactory;
+    protected $table = 'rating_review';
 }

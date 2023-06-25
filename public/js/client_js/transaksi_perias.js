@@ -167,3 +167,38 @@ function submitPembayaran(id,jenis) {
         });
     }
 }
+
+
+// komplain
+
+function getKomplainForm(id){
+    url = "/komplain/create/perias/" + id;
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function (data) {
+            $("#detailTransaksi").on("hidden.bs.modal", function () {
+                $("#komplain").modal("show");
+                $("#modalContentKomplain").html(data.msg);
+            });
+            $("#detailTransaksi").modal("hide");
+        },
+    });
+}
+
+
+
+function getReviewForm(id){
+    url = "/rating-review/create/perias/" + id;
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function (data) {
+            $("#detailTransaksi").on("hidden.bs.modal", function () {
+                $("#rating_review").modal("show");
+                $("#modalContentRatingReview").html(data.msg);
+            });
+            $("#detailTransaksi").modal("hide");
+        },
+    });
+}

@@ -87,7 +87,8 @@
         <button type="button" class="btn btn-default text-white " onclick="batalTransaksi({{$pemesanan->id}})" style="background-color:#89375F" {{ Auth::user() ? '' : 'disabled' }} >Batal</button>
         <button type="button" class="btn btn-default text-white" onclick="getPemesananFormPaket({{$pemesanan->id}})" style="background-color:#89375F" {{ Auth::user() ? '' : 'disabled' }} >Bayar</button>
     @elseif($pemesanan->status_pembayaran == 2)
-        <button type="button" class="btn btn-default text-white" onclick="getReviewForm({{$pemesanan->id}})" style="background-color:#89375F" {{ Auth::user() ? '' : 'disabled' }} >Review</button>
+    <button type="button" class="btn btn-default text-white" onclick="getKomplainForm({{$pemesanan->id}})" style="background-color:#89375F" {{ Auth::user() ? '' : 'disabled' }} >Komplain</button>
+    <button type="button" class="btn btn-default text-white" onclick="getReviewForm({{$pemesanan->id}})" style="background-color:#89375F" {{ Auth::user() ? '' : 'disabled' }} >Review</button>
     @else
         
     @endif

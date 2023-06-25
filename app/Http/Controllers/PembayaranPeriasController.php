@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Komplain;
+use App\Models\RatingReview;
 use Illuminate\Http\Request;
-use App\Models\PembayaranPerias;
 use App\Models\PemesananPerias;
+use App\Models\PembayaranPerias;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
@@ -20,15 +22,15 @@ class PembayaranPeriasController extends Controller
     {
         //
         $pemesanan = PemesananPerias::all();
-        return view('admin.transaksi.index',['title'=>'Perias','pemesanan'=>$pemesanan]);
+        return view('admin.transaksi.perias.index',['pemesanan'=>$pemesanan]);
     }
 
     public function indexAjax()
     {
-        $data = PemesananPerias::all();
+        $pemesanan = PemesananPerias::all();
         return response()->json(array(
             'status' => 'oke',
-            'msg' => view('admin.transaksi.table_perias',compact('data'))->render()
+            'msg' => view('admin.transaksi.perias.table',compact('pemesanan'))->render()
         ), 200);
     }
 
@@ -76,6 +78,10 @@ class PembayaranPeriasController extends Controller
             $new->status_pembayaran = 0;
             $new->save();
             $id_pembayaran_baru = $new->id;
+             // Update Status In Pemesanan 
+            $pemesanan = PemesananPerias::find($request->get('pemesanan_perias_id'));
+            $pemesanan->status = 2;
+            $pemesanan->save();
             // Add Gambar
             $bukti_pembayaran = $request->file('bukti_pembayaran');
             $path = public_path('transaksi/perias/' .$id_pembayaran_baru);
@@ -115,9 +121,17 @@ class PembayaranPeriasController extends Controller
      * @param  \App\Models\PembayaranPerias  $pembayaranPerias
      * @return \Illuminate\Http\Response
      */
-    public function show(PembayaranPerias $pembayaranPerias)
+    public function show( $pembayaranPerias)
     {
         //
+        $pembayaran = PembayaranPerias::find($pembayaranPerias);
+        $komplain = Komplain::where('nomor_pemesanan', $pembayaran->pemesanan->nomor_pemesanan)->get();
+        $rating_review = RatingReview::where('nomor_pemesanan',$pembayaran->pemesanan->nomor_pemesanan)->get();
+
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => view('admin.transaksi.perias.detail',compact('pembayaran','komplain','rating_review'))->render()
+        ), 200);
     }
 
     /**
@@ -153,4 +167,35 @@ class PembayaranPeriasController extends Controller
     {
         //
     }
+
+    public function formVerifPembayaran($id){
+        $pembayaran = PembayaranPerias::find($id);
+
+        // dd($pembayaran);
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => view('admin.transaksi.perias.verif',compact('pembayaran'))->render()
+        ), 200);
+    }
+
+    public function verifyPembayaran(Request $request){
+        try {
+            $pembayaran_id = $request->get('pembayaran_id');
+            $pembayaran_value = $request->get('value');
+            $pembayaranPerias = PembayaranPerias::find($pembayaran_id);
+            $pembayaranPerias->status_pembayaran = $pembayaran_value;
+            $pembayaranPerias->save();
+            return response()->json(array(
+                'status' => 'success',
+                'msg' => 'Verify Pembayaran Berhasil'
+            ), 200);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json(array(
+                'status' => 'error',
+                'msg' => 'Verify Pembayaran Gagal'
+            ), 200);
+        }
+    }
+
 }

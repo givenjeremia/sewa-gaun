@@ -6,23 +6,21 @@
 <div class="row">
     <div class="col-3">
         <div class="input-group">
-            <input id="input-search-gaun" type="date" class="form-control " placeholder="Cari Gaun">
+            <input id="start-date" type="date" class="form-control">
         </div>
     </div>
     <div class="col-3">
         <div class="input-group">
-            <input id="input-search-gaun" type="date" class="form-control " placeholder="Cari Gaun">
+        <input id="end-date" type="date" class="form-control" >
         </div>
     </div>
     <div class="col-3">
         <div class="input-group">
-            <button id="btn-cari" type="button" class="form-control " >Cari</button>
+            <button id="btn-cari" type="button" class="btn btn-primary" >Cari</button>
         </div>
     </div>
 </div>
 </form>
-
-
 
 
 <div id="data-jadwal">

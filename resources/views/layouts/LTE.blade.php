@@ -62,6 +62,21 @@
             background-color:#89375F;
             color: #F3E8FF;/* Change to your desired active text color */
     }
+    .rating input[type="radio"] {
+    display: none;
+}
+
+.rating label {
+    color: #ddd;
+    font-size: 2rem;
+}
+
+.rating input[type="radio"]:checked ~ label,
+.rating label:hover,
+.rating label:hover ~ label {
+    color: #f8ce0b;
+}
+
 
     </style>
 </head>

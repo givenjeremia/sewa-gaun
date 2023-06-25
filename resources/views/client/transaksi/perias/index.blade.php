@@ -55,6 +55,25 @@
     </div>
   </div>
 </div>
+
+
+<div class="modal fade" id="komplain" data-bs-scroll="true" tabindex="-1" role="basic" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" id="modalContentKomplain">
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="rating_review" data-bs-scroll="true" tabindex="-1" role="basic" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" id="modalContentRatingReview">
+
+    </div>
+  </div>
+</div>
+
+
 @endsection
 
 @section('js_client')

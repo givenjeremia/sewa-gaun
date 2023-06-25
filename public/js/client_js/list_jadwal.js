@@ -33,18 +33,18 @@ getData();
 
 
 $("#btn-cari").on("click", function () {
-    var query = $(this).val();
-    url = "/cari-gaun";
+    let start = $('#start-date').val();
+    let end = $('#end-date').val();
+    url = "/jadwal-sort/"+start+"/"+end;
     $.ajax({
         url: url,
-        type: "POST",
-        data: {
-            _token: page,
-            query: query,
-        },
+        type: "GET",
+        // data: {
+        //     _token: page,
+        // },
         success: function (data) {
-            $("#data").html();
-            $("#data").html(data.msg);
+            $("#data-jadwal").html();
+            $("#data-jadwal").html(data.msg);
         },
     });
 });

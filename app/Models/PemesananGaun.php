@@ -13,11 +13,11 @@ class PemesananGaun extends Model
     protected $table = 'pemesanan_gaun';
 
     public function gaun(){
-        return $this->belongsToMany(Gaun::class,'detail_pemesanan_gaun','pemesanan_gaun_id','gaun_id');
+        return $this->belongsToMany(Gaun::class,'detail_pemesanan_gaun','pemesanan_gaun_id','gaun_id')->withPivot('pengembalian','pengambilan');
     }
 
     public function pembayaran(){
-        return $this->hasOne(PembayaranGaun::class,'pemesanan_gaun_id','id');    
+        return $this->hasMany(PembayaranGaun::class,'pemesanan_gaun_id','id');    
     }
 
 }

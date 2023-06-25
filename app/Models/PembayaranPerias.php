@@ -10,4 +10,13 @@ class PembayaranPerias extends Model
     use HasFactory;
     protected $table = 'pembayaran_perias';
 
+    public function gambar_pembayaran(){
+        return $this->hasMany(GambarPembayaran::class,'pembayaran_perias_id','id');    
+    }
+
+    public function pemesanan(){
+        return $this->belongsTo(PemesananPerias::class,'pemesanan_perias_id');  
+    }
+   
+
 }

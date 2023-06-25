@@ -23,9 +23,7 @@
     <div class="collapse navbar-collapse order-3" id="navbarCollapse">
       <!-- Left navbar links -->
       <ul class="navbar-nav">
-        {{-- <li class="nav-item">
-          <a href="{{url('/backend/home')}}" class="nav-link">Home</a>
-        </li> --}}
+        @if (Auth::user()->roles == 0 || Auth::user()->roles == 1) 
         <li class="nav-item dropdown">
           <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             class="nav-link dropdown-toggle">Gaun</a>
@@ -36,7 +34,9 @@
             <li><a href="{{url('admin/jadwals/gaun')}}" class="dropdown-item">Jadwal</a></li>
           </ul>
         </li>
-        {{-- Drop Down Absensi --}}
+        @endif
+   
+        @if (Auth::user()->roles == 0 || Auth::user()->roles == 2) 
         <li class="nav-item dropdown">
           <a id="dropdownSubMenu3" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             class="nav-link dropdown-toggle">Perias</a>
@@ -46,17 +46,21 @@
             <li><a href="{{url('admin/jadwals/perias')}}" class="dropdown-item">Jadwal</a></li>
           </ul>
         </li>
+        @endif
 
-        {{--  --}}
+        @if (Auth::user()->roles == 0) 
         <li class="nav-item dropdown">
           <a id="dropdownSubMenu3" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             class="nav-link dropdown-toggle">Paket</a>
           <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow">
             <li><a href="{{url('admin/paket')}}" class="dropdown-item">Data</a></li>
+            <li><a href="{{url('admin/transaksi-paket')}}" class="dropdown-item">Transaksi</a></li>
           </ul>
         </li>
+        @endif
 
         {{-- Role Gaun --}}
+        @if (Auth::user()->roles == 0 || Auth::user()->roles == 1)      
         <li class="nav-item dropdown">
           <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             class="nav-link dropdown-toggle">Transaksi Gaun</a>
@@ -66,8 +70,10 @@
             <li><a href="{{url('admin/pengembalian-gaun')}}" class="dropdown-item">Pengembalian</a></li>
           </ul>
         </li>
+        @endif
 
         {{-- Role Perias --}}
+        @if (Auth::user()->roles == 0 || Auth::user()->roles == 2)       
         <li class="nav-item dropdown">
           <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             class="nav-link dropdown-toggle">Transaksi Perias</a>
@@ -75,6 +81,8 @@
             <li><a href="{{url('admin/transaksi-perias')}}" class="dropdown-item">Pemesanan</a></li>
           </ul>
         </li>
+        @endif
+       
        
         
       </ul>

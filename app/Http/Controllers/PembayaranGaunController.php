@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Komplain;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\PembayaranGaun;
 use App\Models\PemesananGaun;
+use App\Models\RatingReview;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -20,17 +22,16 @@ class PembayaranGaunController extends Controller
     public function index()
     {
         //
-    
-        $pemesanan = PemesananGaun::all();
-        return view('admin.transaksi.index',['title'=>'Gaun', 'pemesanan'=>$pemesanan]);    
+        return view('admin.transaksi.gaun.penyewaan.index');    
     }
     
     public function indexAjax()
     {
-        $data = PemesananGaun::all();
+        $pemesanan = PemesananGaun::with('pembayaran')->get();;
+        // dd($data);
         return response()->json(array(
             'status' => 'oke',
-            'msg' => view('admin.transaksi.table_gaun',compact('data'))->render()
+            'msg' => view('admin.transaksi.gaun.penyewaan.table',compact('pemesanan'))->render()
         ), 200);
     }
 
@@ -120,9 +121,17 @@ class PembayaranGaunController extends Controller
      * @param  \App\Models\PembayaranGaun  $pembayaranGaun
      * @return \Illuminate\Http\Response
      */
-    public function show(PembayaranGaun $pembayaranGaun)
+    public function show($pembayaranGaun)
     {
         // Show By Penggu
+        $pembayaran = PembayaranGaun::find($pembayaranGaun);
+        $komplain = Komplain::where('nomor_pemesanan', $pembayaran->pemesanan->nomor_pemesanan)->get();
+        $rating_review = RatingReview::where('nomor_pemesanan',$pembayaran->pemesanan->nomor_pemesanan)->get();
+        // dd($komplain);
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => view('admin.transaksi.gaun.penyewaan.detail',compact('pembayaran','komplain','rating_review'))->render()
+        ), 200);
     }
 
     /**
@@ -160,11 +169,100 @@ class PembayaranGaunController extends Controller
     }
 
     public function pengambilanGaun(){
-        return view('admin.transaksi.pengambilan_gaun');
+        
+        return view('admin.transaksi.gaun.pengambilan.index');
+    }
+    public function pengambilanGaunAjax(){
+        $pemesanan = PemesananGaun::all();
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => view('admin.transaksi.gaun.pengambilan.table',compact('pemesanan'))->render()
+        ), 200);
     }
 
     public function pengembalianGaun(){
-        return view('admin.transaksi.pengembalian_gaun');
+        return view('admin.transaksi.gaun.pengembalian.index');
+    }
+
+    public function pengembalianGaunAjax(){
+        $pemesanan = PemesananGaun::all();
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => view('admin.transaksi.gaun.pengembalian.table',compact('pemesanan'))->render()
+        ), 200);
+    }
+
+    public function formVerifPembayaran($id){
+        $pembayaran = PembayaranGaun::find($id);
+
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => view('admin.transaksi.gaun.penyewaan.verif',compact('pembayaran'))->render()
+        ), 200);
+    }
+
+    public function verifyPembayaran(Request $request){
+        try {
+            $pembayaran_id = $request->get('pembayaran_id');
+            $pembayaran_value = $request->get('value');
+            $pembayaranGaun = PembayaranGaun::find($pembayaran_id);
+            $pembayaranGaun->status_pembayaran = $pembayaran_value;
+            $pembayaranGaun->save();
+            return response()->json(array(
+                'status' => 'success',
+                'msg' => 'Verify Pembayaran Berhasil'
+            ), 200);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json(array(
+                'status' => 'error',
+                'msg' => 'Verify Pembayaran Gagal'
+            ), 200);
+        }
+    }
+
+  
+    
+    public function updatePengembalian(Request $request){
+        try {
+            $gaun_id = $request->get('gaun_id');
+            $pemesanan_id = $request->get('pemesanan_id');
+            $value  = $request->get('value');
+            $pemesananGaun = PemesananGaun::find($pemesanan_id);
+            $pemesananGaun->gaun()->updateExistingPivot($gaun_id, ['pengembalian' => 1]);
+            return response()->json(array(
+                'status' => 'success',
+                'msg' => 'Update Pengembalian Berhasil'
+            ), 200);
+            
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json(array(
+                'status' => 'error',
+                'msg' => 'Update Pengembalian Gagal'
+            ), 200);
+        }
+    }
+
+    public function updatePengambilan(Request $request){
+        try {
+            $gaun_id = $request->get('gaun_id');
+            $pemesanan_id = $request->get('pemesanan_id');
+            $value  = $request->get('value');
+            $pemesananGaun = PemesananGaun::find($pemesanan_id);
+            $pemesananGaun->gaun()->updateExistingPivot($gaun_id, ['pengambilan' => $value]);
+            return response()->json(array(
+                'status' => 'success',
+                'msg' => 'Update Pengambilan Berhasil'
+            ), 200);
+            
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json(array(
+                'status' => 'error',
+                'msg' => 'Update pengambilan Gagal'
+            ), 200);
+        }
     }
 
 }

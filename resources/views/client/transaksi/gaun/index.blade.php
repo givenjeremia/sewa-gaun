@@ -1,17 +1,7 @@
 @extends('layouts.client')
 @section('content')
 <input type="hidden" id="transaksi_gaun_page"  value="{{ csrf_token() }}">
-<div class=" mx-5">
-  <div class="d-flex justify-content-between align-items-center">
-    <div class="ratings">
-        <i class="fa fa-star rating-color"></i>
-        <i class="fa fa-star rating-color"></i>
-        <i class="fa fa-star rating-color"></i>
-        <i class="fa fa-star rating-color"></i>
-        <i class="fa fa-star"></i>
-    </div>
-    <h5 class="review-count">12 Reviews</h5>
-</div>
+
     <h4>Daftar Transaksi Gaun</h4>
     <div class="card">
         <div class="card-header p-2">
@@ -65,8 +55,30 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="komplain" data-bs-scroll="true" tabindex="-1" role="basic" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" id="modalContentKomplain">
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="rating_review" data-bs-scroll="true" tabindex="-1" role="basic" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" id="modalContentRatingReview">
+
+    </div>
+  </div>
+</div>
+
+
 @endsection
 
 @section('js_client')
     <script src="{{ asset('js/client_js/transaksi_gaun.js') }}"></script>
+    <script>
+    
+
+    </script>
 @endsection

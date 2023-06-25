@@ -96,7 +96,7 @@ class PemesananPeriasController extends Controller
             $new->alamat = $request->get('alamat');
             $new->telepon = $request->get('telepon');
             $new->total_pembayaran = $request->get('total');
-            $new->status = 0;
+            $new->status = 1;
             $new->users_id = $user->id;
             $new->save();
             $id_pemesana_baru = $new->id;

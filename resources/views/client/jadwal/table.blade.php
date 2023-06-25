@@ -1,4 +1,7 @@
 <div class="card mt-2">
+  <div class="card-header">
+    <h3 class="card-title">Jadwal Bulan {{ $keterangan }}</h3>
+  </div>
     <!-- /.card-header -->
     <div class="card-body">
       <div class="table-responsive">
