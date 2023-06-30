@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Komplain;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-use App\Models\PembayaranGaun;
-use App\Models\PemesananGaun;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use App\Models\Komplain;
 use App\Models\RatingReview;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\Models\PemesananGaun;
+use App\Models\PembayaranGaun;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\View;
 
 class PembayaranGaunController extends Controller
 {
@@ -263,6 +266,22 @@ class PembayaranGaunController extends Controller
                 'msg' => 'Update pengambilan Gagal'
             ), 200);
         }
+    }
+
+    public function cetakInvoice($id){
+        
+        // 
+        $options = new Options();
+        $options->setChroot('');
+       
+        $dompdf = new Dompdf();
+        $dompdf->setOptions($options);
+        $dompdf->getCanvas();
+        $data = PemesananGaun::find($id);
+        $dompdf->loadHtml(View::make('client.transaksi.gaun.invoice', compact('data') )->render());
+        $dompdf->render();
+        $title = 'skr';
+        return $dompdf->stream($title, ['Attachment' => false]);
     }
 
 }

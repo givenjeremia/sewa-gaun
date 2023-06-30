@@ -58,6 +58,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('penyewaan-mua', App\Http\Controllers\PenyewaanPeriasController::class);
 
     Route::resource('pembayaran-gaun', App\Http\Controllers\PembayaranGaunController::class);
+    Route::get('gaun-invoice/{id}', [App\Http\Controllers\PembayaranGaunController::class,'cetakInvoice']);
+
     Route::resource('pembayaran-perias', App\Http\Controllers\PembayaranPeriasController::class);
 
 
