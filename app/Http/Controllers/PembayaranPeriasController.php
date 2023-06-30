@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Models\Komplain;
 use App\Models\RatingReview;
 use Illuminate\Http\Request;
@@ -10,6 +12,7 @@ use App\Models\PemesananPerias;
 use App\Models\PembayaranPerias;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\View;
 
 class PembayaranPeriasController extends Controller
 {
@@ -196,6 +199,22 @@ class PembayaranPeriasController extends Controller
                 'msg' => 'Verify Pembayaran Gagal'
             ), 200);
         }
+    }
+
+    public function cetakInvoice($id){
+        
+        // 
+        $options = new Options();
+        $options->setChroot('');
+       
+        $dompdf = new Dompdf();
+        $dompdf->setOptions($options);
+        $dompdf->getCanvas();
+        $data = PemesananPerias::find($id);
+        $dompdf->loadHtml(View::make('client.transaksi.perias.invoice', compact('data') )->render());
+        $dompdf->render();
+        $title = 'Invoice '.$data->nomor_pemesanan;
+        return $dompdf->stream($title, ['Attachment' => true]);
     }
 
 }

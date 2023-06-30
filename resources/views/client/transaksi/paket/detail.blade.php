@@ -89,6 +89,8 @@
     @elseif($pemesanan->status_pembayaran == 2)
     <button type="button" class="btn btn-default text-white" onclick="getKomplainForm({{$pemesanan->id}})" style="background-color:#89375F" {{ Auth::user() ? '' : 'disabled' }} >Komplain</button>
     <button type="button" class="btn btn-default text-white" onclick="getReviewForm({{$pemesanan->id}})" style="background-color:#89375F" {{ Auth::user() ? '' : 'disabled' }} >Review</button>
+    <a href="{{ url('/paket-invoice/'.$pemesanan->id) }}" type="button" class="btn btn-default text-white" style="background-color:#89375F" {{ Auth::user() ? '' : 'disabled' }} >Cetak Invoice</a>
+
     @else
         
     @endif

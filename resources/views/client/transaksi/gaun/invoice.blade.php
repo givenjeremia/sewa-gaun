@@ -13,72 +13,8 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ public_path('lte/plugins/fontawesome-free/css/all.min.css') }}">
-    <!-- DataTables -->
-    {{-- <link rel="stylesheet" href="{{ public_path('lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}} "> --}}
-    {{-- <link rel="stylesheet" href="{{ public_path('lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}"> --}}
-    {{-- <link rel="stylesheet" href="{{ public_path('lte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}"> --}}
-    <!-- fullCalendar -->
-    {{-- <link rel="stylesheet" href="{{ public_path('lte/plugins/fullcalendar/main.css')}}"> --}}
-    <!-- Ionicons -->
-    {{-- <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> --}}
-    <!-- Tempusdominus Bootstrap 4 -->
-    {{-- <link rel="stylesheet" href="{{ public_path('lte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}"> --}}
-    <!-- iCheck -->
-    {{-- <link rel="stylesheet" href="{{ public_path('lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}"> --}}
-    <!-- JQVMap -->
-    {{-- <link rel="stylesheet" href="{{ public_path('lte/plugins/jqvmap/jqvmap.min.css') }}"> --}}
-    <!-- Theme style -->
+
     <link rel="stylesheet" href="{{ public_path('lte/dist/css/adminlte.min.css') }}">
-    <!-- overlayScrollbars -->
-    {{-- <link rel="stylesheet" href="{{ public_path('lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}"> --}}
-    <!-- Daterange picker -->
-    {{-- <link rel="stylesheet" href="{{ public_path('lte/plugins/daterangepicker/daterangepicker.css') }}"> --}}
-    <!-- SweetAlert2 -->
-    <link rel="stylesheet" href="{{ public_path('lte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
-    <!-- summernote -->
-    {{-- <link rel="stylesheet" href="{{ public_path('lte/plugins/summernote/summernote-bs4.min.css') }}"> --}}
-    {{-- <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" /> --}}
-    {{-- <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" /> --}}
-    <style>
-        .custom-text-primary-italianno {
-            font-family: 'Italianno';
-            color: #89375F;
-        }
-
-        .custom-text-primary-poppins {
-            font-family: 'Poppins';
-            color: #89375F;
-        }
-
-        .card-hover:hover {
-            box-shadow: 0 0 5px rgba(0, 0, 0, 1);
-            transition: box-shadow 0.3s;
-        }
-        .pagination .page-link {
-            color: #89375F;
-        }
-        .pagination .page-item.active .page-link {
-            border-color:#89375F;
-            background-color:#89375F;
-            color: #F3E8FF;/* Change to your desired active text color */
-    }
-    .rating input[type="radio"] {
-    display: none;
-}
-
-.rating label {
-    color: #ddd;
-    font-size: 2rem;
-}
-
-.rating input[type="radio"]:checked ~ label,
-.rating label:hover,
-.rating label:hover ~ label {
-    color: #f8ce0b;
-}
-
-
-    </style>
 </head>
 
 <body class="hold-transition layout-top-nav">
@@ -91,7 +27,7 @@
               <div class="row">
                 <div class="col-12">
                   <h4>
-                    Millenimua
+                    Millenimua ( Gaun )
                     <small class="float-right mx-2">Nomor Pemesanan : {{ $data->nomor_pemesanan }}</small>
                   </h4>
                 </div>

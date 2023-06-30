@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Models\Paket;
 use App\Models\Jadwal;
 use App\Models\Komplain;
@@ -13,6 +15,7 @@ use App\Models\PemesananPaket;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\View;
 
 class PemesananPaketController extends Controller
 {
@@ -297,6 +300,23 @@ class PemesananPaketController extends Controller
                 'msg' => 'Verify Pembayaran Gagal'
             ), 200);
         }
+    }
+
+
+    public function cetakInvoice($id){
+        
+        // 
+        $options = new Options();
+        $options->setChroot('');
+       
+        $dompdf = new Dompdf();
+        $dompdf->setOptions($options);
+        $dompdf->getCanvas();
+        $data = PemesananPaket::find($id);
+        $dompdf->loadHtml(View::make('client.transaksi.paket.invoice', compact('data') )->render());
+        $dompdf->render();
+        $title = 'Invoice '.$data->nomor_pemesanan;
+        return $dompdf->stream($title, ['Attachment' => true]);
     }
 
 

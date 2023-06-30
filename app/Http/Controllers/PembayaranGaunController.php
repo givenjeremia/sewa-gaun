@@ -280,8 +280,8 @@ class PembayaranGaunController extends Controller
         $data = PemesananGaun::find($id);
         $dompdf->loadHtml(View::make('client.transaksi.gaun.invoice', compact('data') )->render());
         $dompdf->render();
-        $title = 'skr';
-        return $dompdf->stream($title, ['Attachment' => false]);
+        $title = 'Invoice '.$data->nomor_pemesanan;
+        return $dompdf->stream($title, ['Attachment' => true]);
     }
 
 }

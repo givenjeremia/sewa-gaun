@@ -61,7 +61,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('gaun-invoice/{id}', [App\Http\Controllers\PembayaranGaunController::class,'cetakInvoice']);
 
     Route::resource('pembayaran-perias', App\Http\Controllers\PembayaranPeriasController::class);
-
+    Route::get('perias-invoice/{id}', [App\Http\Controllers\PembayaranPeriasController::class,'cetakInvoice']);
 
     // Rating 
     Route::resource('rating-review', App\Http\Controllers\RatingReviewController::class);
@@ -69,6 +69,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('paket/create/{id}', [App\Http\Controllers\PaketController::class, 'create']);
     Route::resource('pemesanan-paket', App\Http\Controllers\PemesananPaketController::class);
     Route::post('pembayaran-paket', [App\Http\Controllers\PemesananPaketController::class, 'pembayaranPaket']);
+    Route::get('paket-invoice/{id}', [App\Http\Controllers\PemesananPaketController::class,'cetakInvoice']);
+
 
     // Jadwal
     Route::get('list-jadwal', [App\Http\Controllers\HomeController::class, 'indexJadwal']);
