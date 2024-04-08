@@ -96,9 +96,6 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-header">My Profile</span>
           <div class="dropdown-divider"></div>
-          <a href="" class="dropdown-item">
-            Edit Profile
-          </a>
           <div class="dropdown-divider"></div>
           <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();" class="dropdown-item">

@@ -153,7 +153,7 @@ function tambahPaket() {
     });
 }
 
-function hapuspaket(id,data) {
+function hapusPaket(id,data) {
     Swal.fire({
         target: document.getElementById("data"),
         title: "Apakah anda yakin akan menghapus data ini?",

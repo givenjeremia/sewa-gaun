@@ -2,6 +2,7 @@
 
 @section('content')
 <input type="hidden" id="penyewaan_gaun_page"  value="{{ csrf_token() }}">
+<input type="hidden" id="landing_page"  value="{{ csrf_token() }}">
 <h2 class="text-center display-4 custom-text-primary-poppins text-bold">Katalog</h2>
 <div class="row">
     <div class="col-md-8 offset-md-2">
@@ -77,6 +78,7 @@
 @endsection
 
 @section('js_client')
+<script src="{{ asset('js/client_js/landing_page.js') }}"></script>
     <script src="{{ asset('js/client_js/gaun.js') }}"></script>
 @endsection
 

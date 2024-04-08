@@ -71,6 +71,7 @@ class KategoriGaunController extends Controller
     {
         //
         $kategoriGaun = KategoriGaun::find($kategoriGaun);
+        // dd($kategoriGaun);
         return response()->json(array(
             'status' => 'oke',
             'msg' => view('admin.list.kategori_gaun.update',compact('kategoriGaun'))->render()

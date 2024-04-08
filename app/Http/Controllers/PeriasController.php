@@ -7,6 +7,7 @@ use App\Models\HasilRias;
 use Illuminate\Http\Request;
 use App\Models\GambarHasilRias;
 use App\Models\KatergoryPerias;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
 class PeriasController extends Controller
@@ -53,7 +54,8 @@ class PeriasController extends Controller
     {
         //
         // dd($request->file('hasil_rias'));
-        $perias = new Perias();
+        try {
+            $perias = new Perias();
         $perias->nama = $request->get('nama');
         $perias->harga = $request->get('harga');
         $perias->deskripsi = $request->get('deskripsi');
@@ -93,6 +95,11 @@ class PeriasController extends Controller
             // dd( );
         }
         return response()->json(array('status' => 'success', 'msg' => 'Perias Berhasil Ditambahkan'), 200);
+        } catch (\Throwable $th) {
+        return response()->json(array('status' => 'error', 'msg' => 'Perias Gagal Di Tambahkan'), 200);
+            
+        }
+        
     }
 
     /**
@@ -154,6 +161,7 @@ class PeriasController extends Controller
     public function destroy($perias)
     {
         //
+        DB::beginTransaction();
         try {
             $hasil_rias = HasilRias::where('perias_id',$perias)->get();
             foreach ($hasil_rias as $key => $value) {
@@ -162,10 +170,12 @@ class PeriasController extends Controller
             $perias = Perias::find($perias);
             $perias->hasil_rias()->delete();
             $perias->delete();
+            DB::commit();
             return response()->json(array('status' => 'success', 'msg' => 'Gaun Berhasil Di Hapus'), 200);
 
         } catch (\Throwable $th) {
             //throw $th;
+            DB::rollBack();
             return response()->json(array('status' => 'gagal', 'msg' => 'Gaun Gagal Di Delete '), 200);
         }
     }

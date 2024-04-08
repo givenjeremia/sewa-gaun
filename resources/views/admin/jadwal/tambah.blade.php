@@ -21,9 +21,9 @@
             </div>
             @else
             <div class="form-group">
-              <label for="exampleInputEmail1"></label>
-              <select name="gaun" class="form-control">
-                @foreach($gaun as $key => $value)
+              <label for="exampleInputEmail1">Perias</label>
+              <select name="perias" class="form-control">
+                @foreach($perias as $key => $value)
                   <option value="{{ $value->id }}">{{ $value->nama }}</option>
                 @endforeach
               </select>

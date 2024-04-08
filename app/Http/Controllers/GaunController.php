@@ -7,6 +7,7 @@ use App\Models\Gaun;
 use App\Models\GambarGaun;
 use App\Models\KategoriGaun;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
 class GaunController extends Controller
@@ -151,15 +152,18 @@ class GaunController extends Controller
     public function destroy($gaun)
     {
         //
+        DB::beginTransaction();
         try {
             // Hapus Gambar 
             $gaun = Gaun::find($gaun);
             $gaun->gambars()->delete();
             $gaun->delete();
+            DB::commit(); //
             return response()->json(array('status' => 'success', 'msg' => 'Gaun Berhasil Di Hapus'), 200);
 
         } catch (\Throwable $th) {
             //throw $th;
+            DB::rollBack();
             return response()->json(array('status' => 'gagal', 'msg' => 'Gaun Gagal Di Delete'), 200);
         }
     }

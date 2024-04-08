@@ -106,10 +106,10 @@ class JadwalController extends Controller
 
             }           
         }
-        $role = 'gaun';
+        $role= 'perias';
         return response()->json(array(
             'status' => 'oke',
-            'msg' => view('admin.jadwal.gaun',compact('date_1_month','role'))->render()
+            'msg' => view('admin.jadwal.perias',compact('date_1_month','role'))->render()
         ), 200);
     }
 
@@ -229,6 +229,7 @@ public function getDetailGaun($tanggal){
     public function destroy(Jadwal $jadwal)
     {
         //
+        
     }
 
     

@@ -7,6 +7,7 @@ use App\Models\Paket;
 use App\Models\Perias;
 use App\Models\GambarPaket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
@@ -154,13 +155,22 @@ class PaketController extends Controller
      * @param  \App\Models\Paket  $paket
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Paket $paket)
+    public function destroy($paket)
     {
         //
+        DB::BeginTransaction();
         try {
-            # code...
-        } catch (\Throwable $e) {
-            # code...
+            // Hapus Gambar 
+            $paket = Paket::find($paket);
+            $paket->gambars()->delete();
+            $paket->delete();
+            DB::commit();
+            return response()->json(array('status' => 'success', 'msg' => 'Paket Berhasil Di Hapus'), 200);
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+            return response()->json(array('status' => 'gagal', 'msg' => 'Paket Gagal Di Delete'), 200);
         }
     }
 }

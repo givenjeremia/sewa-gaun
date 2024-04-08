@@ -83,12 +83,12 @@ function tambahKategoriPerias() {
 }
 
 function getEditForm(id) {
-    url = "/admin/gaun/" + id;
+    url = "/admin/kategory-perias/" + id;
     $.ajax({
         url: url,
         type: "GET",
         success: function (data) {
-            $("#modalContentEditGaun").html(data.msg);
+            $("#modalContentEditKatPerias").html(data.msg);
         },
     });
 }

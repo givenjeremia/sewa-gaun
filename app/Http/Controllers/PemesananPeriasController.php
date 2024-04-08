@@ -116,7 +116,7 @@ class PemesananPeriasController extends Controller
 
         } catch ( \Throwable $th ) {
             //throw $th;
-            return response()->json( array( 'status' => 'error', 'msg' => 'Pemesanan Gagal Di Buat '.$th ), 200 );
+            return response()->json( array( 'status' => 'error', 'msg' => 'Terdapat Kesalahan Harap Periksa Inputan' ), 200 );
 
         }
     }

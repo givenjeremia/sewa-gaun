@@ -38,13 +38,13 @@
 </div>
 
 @if ($role == 'perias')
+<h3>Jadwal Perias Bulan Ini</h3>
 <div id="table-perias">
-    <h3>Jadwal Perias Bulan Ini</h3>
     @include('admin/jadwal/perias')
 </div>
 @else
+<h3>Jadwal Gaun Bulan Ini</h3>
 <div id="table-gaun">
-    <h3>Jadwal Gaun Bulan Ini</h3>
     @include('admin/jadwal/gaun')
 </div>
 @endif

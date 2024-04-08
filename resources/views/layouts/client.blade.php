@@ -5,7 +5,9 @@
 
 <!-- Preloader -->
 <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+    <div class="spinner-border" role="status">
+        <span class="visually-hidden"></span>
+    </div>
 </div>
 
 
@@ -56,7 +58,7 @@
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <span class="dropdown-header">My Profile</span>
                 <div class="dropdown-divider"></div>
-                <a href="" class="dropdown-item">
+                <a href="#" data-toggle="modal" data-target="#modal-lg" class="dropdown-item">
                     Edit Profile
                 </a>
                 <div class="dropdown-divider"></div>
@@ -109,9 +111,79 @@
     @yield('content')
 </div>
 
+{{-- Tambah Gaun --}}
+@include('client/profile/update')
 
 @endsection
 
 @section('js')
+<script>
+    $('#updateProfileData').on('click', function(){
+        var form = document.querySelector('#changeProfileDataForm');
+        // var form = $('')
+        var form_data = new FormData(form);
+        var url = '/update-profile-data'
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: form_data, 
+            dataType: "json", 
+            contentType: false,
+            processData: false, 
+            success: function (data) {
+                if (data.status === "success") {
+                    Swal.fire({
+                        title: "Success",
+                        text: data.msg,
+                        icon: "success",
+                        showConfirmButton: true,
+                    }).then((result) => {
+                        window.location.href = "/";
+                    });
+                } else {
+                    Swal.fire({
+                        title: "Error",
+                        text: data.msg,
+                        icon: "error",
+                        showConfirmButton: true,
+                    });
+                }
+            }
+        });
+    })
+    $('#updateProfilePassword').on('click', function(){
+        var form = document.querySelector('#changeProfilePasswordForm');
+        var form_data = new FormData(form);
+        var url = '/update-profile-password'
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: form_data, 
+            dataType: "json", 
+            contentType: false,
+            processData: false, 
+            success: function (data) {
+                if(data.status == 'success'){
+                    Swal.fire({
+                        title: "Success",
+                        text: data.msg,
+                        icon: "success",
+                        showConfirmButton: true,
+                    }).then((result) => {
+                        window.location.href = "/";
+                    });
+                }
+                else{
+                    Swal.fire({
+                        title: "Error",
+                        text: data.msg,
+                        icon: "error",
+                        showConfirmButton: true,
+                    });
+                }
+            }
+        });
+    })
+</script>
 @yield('js_client')
 @endsection

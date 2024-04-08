@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalScrollableTitle">Detal Jadwal Tanggal {{ $tanggal }}</h5>
+    <h5 class="modal-title" id="exampleModalScrollableTitle">Detail Jadwal Tanggal {{ date('d F y',strtotime($tanggal)) }}</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>

@@ -1,6 +1,4 @@
-@php
-    // dd($date_1_month[0][0])x
-@endphp
+
 <table class="table table-bordered table-striped table-hover">
     @for($i = 1; $i <= count($date_1_month); $i++)
         @if ($i % 7 == 1)

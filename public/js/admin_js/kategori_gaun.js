@@ -83,12 +83,12 @@ function tambahKategoriGaun() {
 }
 
 function getEditForm(id) {
-    url = "/admin/gaun/" + id;
+    url = "/admin/kategory-gaun/" + id;
     $.ajax({
         url: url,
         type: "GET",
         success: function (data) {
-            $("#modalContentEditGaun").html(data.msg);
+            $("#modalContentEditKatGaun").html(data.msg);
         },
     });
 }
@@ -101,7 +101,7 @@ function editKategoriGaun(id) {
     $("form#FormEditKategoriGaun :input").each(function () {
         var inputName = $(this).attr("name");
         var inputValue = $(this).val();
-        if (inputName == "data_kat_edit_perias") {
+        if (inputName == "data_kat_edit_gaun") {
             csrfToken = inputValue;
             form_data.append("_token", inputValue);
         } else {

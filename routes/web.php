@@ -85,6 +85,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('rating-review', App\Http\Controllers\RatingReviewController::class);
     Route::get('rating-review/create/{jenis}/{id}', [App\Http\Controllers\RatingReviewController::class, 'create']);
 
+    // User
+    Route::post('update-profile-data', [App\Http\Controllers\UserController::class, 'updateProfileData']);
+    Route::post('update-profile-password', [App\Http\Controllers\UserController::class, 'updateProfilePassword']);
+
 
 
     // Admin
