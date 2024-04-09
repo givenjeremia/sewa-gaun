@@ -33,6 +33,12 @@ class PaketController extends Controller
         ), 200);
     }
 
+    public function indexLanding()
+    {
+        $data = Paket::paginate(6);
+        return view('client.paket.index', compact('data'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

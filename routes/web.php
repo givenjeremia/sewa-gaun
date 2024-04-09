@@ -66,10 +66,16 @@ Route::middleware(['auth'])->group(function () {
     // Rating 
     Route::resource('rating-review', App\Http\Controllers\RatingReviewController::class);
 
+    // Paket
     Route::get('paket/create/{id}', [App\Http\Controllers\PaketController::class, 'create']);
     Route::resource('pemesanan-paket', App\Http\Controllers\PemesananPaketController::class);
     Route::post('pembayaran-paket', [App\Http\Controllers\PemesananPaketController::class, 'pembayaranPaket']);
+
+    Route::get('list-paket', [App\Http\Controllers\PaketController::class, 'indexLanding'])->name('list.paket');
+
+    
     Route::get('paket-invoice/{id}', [App\Http\Controllers\PemesananPaketController::class,'cetakInvoice']);
+    
 
 
     // Jadwal
